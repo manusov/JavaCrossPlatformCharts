@@ -4,7 +4,7 @@ package charts.view.about;
 
 public class About 
 {
-private final static String VERSION_NAME = "v0.05";
+private final static String VERSION_NAME = "v0.06";
 private final static String VENDOR_NAME  = "(C)2018 IC Book Labs";
 private final static String SHORT_NAME   = "Charts " + VERSION_NAME;
 private final static String LONG_NAME    = "Java " + SHORT_NAME;
