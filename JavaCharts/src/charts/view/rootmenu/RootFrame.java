@@ -10,6 +10,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 public class RootFrame extends JFrame
 {
@@ -40,7 +42,43 @@ public RootFrame( String name, JPanel[][] x1 , JPanel[][] x2 , JPanel[][] x3 )
     JMenuItem about = new JMenuItem(handlerAbout);
     help.add(about);    // add "About" item to "Help" menu level
     menuBar.add(help);  // add "Help" item to menu bar
+    // This required to prevent charts corruption when root menu works (v0.07)
+    DrawRefresh dr = new DrawRefresh();
+    file.addMenuListener(dr);
+    help.addMenuListener(dr);
     }
+
+// This required to prevent charts corruption when root menu works (v0.07)
+private class DrawRefresh implements MenuListener
+    {
+    @Override public void menuSelected(MenuEvent e)
+        {
+        // refresh not required for SELECT action: area re-drawed by menu
+        }
+    @Override public void menuDeselected(MenuEvent e)
+        {
+        // refresh required for deselect action
+        refresh();
+        }
+    @Override public void menuCanceled(MenuEvent e) 
+        {
+        // refresh not required for CANCELLED action: are re-drawed by DESELECT
+        }
+
+    private void refresh()
+        {
+        int n = displays.length;
+        for(int i=0; i<n; i++)
+            {
+            int m = displays[i].length;
+            for(int j=0; j<m; j++)
+                {
+                displays[i][j].repaint();
+                }
+            }
+        }
+    }
+
 
 // Start GUI application
 public void startApplication()

@@ -1,7 +1,7 @@
 /*
 
 Java Function Graphs utility.
-(C)IC Book Labs.
+(C)2018 IC Book Labs.
 (C)2018 Manusov I.V.
 
 Main class with application entry point.
@@ -45,6 +45,8 @@ TODO (maraphon mode after existed valid version v0.01):
 12) Auto scaling and correct default scaling customization by function.
 13) Total verification.
 
+v0.07. BUG FIXED: graphics window corrupted when work main menu.
+       Under verify. RootFrame.java. Marker "v0.07".
 
 */
 
