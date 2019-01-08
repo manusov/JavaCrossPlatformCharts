@@ -1,5 +1,10 @@
-// Label description class: select color scheme.
-// This label is name of combo box, located near associated combo box.
+/*
+
+Label description class: select color scheme.
+This label is name of color selection combo box, 
+this label located near associated combo box.
+
+*/
 
 package charts.controller.labels;
 

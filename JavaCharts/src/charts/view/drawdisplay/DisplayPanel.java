@@ -1,6 +1,12 @@
-// Description and builder class for drawings display panel.
-// JPanel class with additional function: store lists of JComponents.
-// Override paint() method for function graph functionality.
+/*
+
+Description and builder class for drawings display panel.
+JPanel class with additional function: store lists of JComponents.
+Override paint() method for function graph functionality.
+This class visualizes function Y=F(X) and additional information:
+function name, Y,Y axis, axis text labels and other view elements.
+
+*/
 
 package charts.view.drawdisplay;
 

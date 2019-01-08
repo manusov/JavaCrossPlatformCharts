@@ -1,5 +1,14 @@
-// Action listener (events handler) class for control buttons press.
-// This listener connected to buttons by builder in the KeyboardFabric class.
+/*
+
+Action listener (events handler) class for control buttons press.
+This listener connected to buttons by builder in the KeyboardFabric class.
+When button action performed:
+1) detect event,
+2) execute operation, associated with this button,
+3) refresh Display and Status components, 
+4) set buttons enable/disable by result of operation.
+
+*/
 
 package charts.controller;
 
@@ -40,7 +49,7 @@ public ButtonsAction ( DescriptButton[] db , FunctionCore fc ,
         try {
             selector = Integer.decode(command);
             }
-        catch (Exception e)
+        catch (Exception e)  // handling error when convert string to number
             {
             selector = -1;  // force wrong button ID if error
             }

@@ -1,6 +1,10 @@
-// Action handler for root menu: application exit.
-// This action listener (handler) connected to root menu item "Exit" 
-// in the RootFrame constructor.
+/*
+
+Action handler for root menu: application exit.
+This action listener (handler) connected to root menu item "Exit" 
+in the RootFrame constructor.
+
+*/
 
 package charts.view.rootmenu;
 

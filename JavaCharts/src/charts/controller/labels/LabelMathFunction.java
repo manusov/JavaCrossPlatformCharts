@@ -1,5 +1,10 @@
-// Label description class: select math. function.
-// This label is name of combo box, located near associated combo box.
+/*
+
+Label description class: select mathematics function.
+This label is name of math. function selection combo box,
+this label located near associated combo box.
+
+*/
 
 package charts.controller.labels;
 

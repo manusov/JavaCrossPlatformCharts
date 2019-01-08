@@ -1,4 +1,9 @@
-// Return window for "About" user interface object: JDialog.
+/*
+
+Return window for "About" user interface object: JDialog.
+Returned object can be visualized by caller.
+
+*/
 
 package charts.view.about;
 

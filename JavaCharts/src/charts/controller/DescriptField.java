@@ -1,4 +1,9 @@
-// Abstract class for text field description template.
+/*
+
+Abstract class for text field description template.
+This is template for real text fields descriptions.
+
+*/
 
 package charts.controller;
 

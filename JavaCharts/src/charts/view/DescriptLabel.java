@@ -1,6 +1,10 @@
-// Description class for text label.
-// This variant ( 2 of 2) for changeable texts, 
-// see also DescriptLabelConst.java.
+/*
+
+Description class for text label.
+This variant ( 2 of 2) for changeable texts, 
+see also DescriptLabelConst.java at CONTROLLER package.
+
+*/
 
 package charts.view;
 

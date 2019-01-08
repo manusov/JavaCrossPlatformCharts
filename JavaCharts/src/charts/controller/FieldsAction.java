@@ -1,6 +1,14 @@
-// Action listener (event handler) for text fields.
-// This listener connected to text fields by builder in the
-// KeyboardFabric class.
+/*
+
+Action listener (event handler) for text fields.
+This listener connected to text fields by builder in the
+KeyboardFabric class.
+When text field action performed:
+1) detect event,
+2) execute operation, associated with this text field,
+3) refresh Display and Status components, 
+
+*/
 
 package charts.controller;
 
@@ -37,7 +45,7 @@ public FieldsAction ( DescriptField[] df , FunctionCore fc ,
         try {
             selector = Integer.decode(command);
             }
-        catch (Exception e)
+        catch (Exception e)   // handling error when convert string to number
             {
             selector = -1;    // force wrong field ID if error
             }

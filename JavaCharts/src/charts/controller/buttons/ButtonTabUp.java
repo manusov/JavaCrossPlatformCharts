@@ -1,4 +1,10 @@
-// Button description class: increase tabulation step.
+/*
+
+Button description class: increase tabulation step.
+This button increments number of function tabulation steps per interval,
+increase function visualization quality.
+
+*/
 
 package charts.controller.buttons;
 

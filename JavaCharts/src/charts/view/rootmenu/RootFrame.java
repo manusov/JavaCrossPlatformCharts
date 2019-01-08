@@ -1,5 +1,11 @@
-// Application frame with root menu,
-// see calculator sources for dynamical mode changes from root menu.
+/*
+
+Application frame with root menu,
+see calculator sources for dynamical mode changes from root menu.
+TODO:
+Store root menu items as control data class, not part of executable code.
+
+*/
 
 package charts.view.rootmenu;
 

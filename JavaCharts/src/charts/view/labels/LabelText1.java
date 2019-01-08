@@ -1,6 +1,10 @@
-// Description class for changeable status label #1.
-// See detail comments about methods
-// in the abstract parent class DescriptLabel.java.
+/*
+
+Description class for changeable status label #1.
+See detail comments about methods
+in the abstract parent class DescriptLabel.java.
+
+*/
 
 package charts.view.labels;
 

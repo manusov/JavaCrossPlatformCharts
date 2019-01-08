@@ -1,4 +1,10 @@
-// Text field description class: input minimum X value.
+/*
+
+Text field description class: input minimum X value.
+This text field used for select function draw X minimum (left),
+yet not supported.
+
+*/
 
 package charts.controller.fields;
 

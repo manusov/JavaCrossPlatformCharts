@@ -1,4 +1,10 @@
-// Combo box description class: select color scheme.
+/*
+
+Combo box description class: this combo box selects color scheme.
+Dark background can be optimal for screen, 
+white background can be optimal for printer.
+
+*/
 
 package charts.controller.combo;
 

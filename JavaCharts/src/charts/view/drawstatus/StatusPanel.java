@@ -1,5 +1,11 @@
-// Description and builder class for status panel.
-// JPanel class with additional function: store lists of JComponents.
+/*
+
+Description and builder class for status panel.
+JPanel class with additional function: store lists of JComponents.
+Status panel used for function and interval description,
+include values statistics at calculated interval.
+
+*/
 
 package charts.view.drawstatus;
 

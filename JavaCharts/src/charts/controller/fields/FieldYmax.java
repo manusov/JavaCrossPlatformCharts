@@ -1,4 +1,11 @@
-// Text field description class: input maximum Y value.
+/*
+
+Text field description class: input maximum Y value.
+This text field used for select function draw Y maximum (top),
+yet not supported.
+
+
+*/
 
 package charts.controller.fields;
 

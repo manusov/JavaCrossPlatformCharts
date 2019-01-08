@@ -1,4 +1,9 @@
-// Abstract class for button description template.
+/*
+
+Abstract class for button description template.
+This is template for real buttons descriptions.
+
+*/
 
 package charts.controller;
 

@@ -1,5 +1,11 @@
-// Interconnect class for function, calculation module and
-// function drawing model.
+/*
+
+Interconnect class for function, calculation module and
+function drawing model.
+This class can handling control messages for
+select mathematics function visualization option.
+
+*/
 
 package charts.model;
 

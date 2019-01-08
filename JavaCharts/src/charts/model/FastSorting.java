@@ -1,5 +1,11 @@
-// Helper class for fast sorting.
-// Note sorting required for find median algorithm.
+/*
+
+Helper class for fast sorting.
+Note sorting required for find median algorithm.
+TODO: 
+Replace to JVM/Hardware accelerated sorting methods.
+
+*/
 
 package charts.model;
 

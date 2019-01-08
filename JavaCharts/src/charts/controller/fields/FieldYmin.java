@@ -1,4 +1,10 @@
-// Text field description class: input minimum Y value.
+/*
+
+Text field description class: input minimum Y value.
+This text field used for select function draw Y minimum (down),
+yet not supported.
+
+*/
 
 package charts.controller.fields;
 

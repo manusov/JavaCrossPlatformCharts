@@ -1,5 +1,13 @@
-// Function calculation, call target method, accepted as parameter,
-// this assist method for convert input parameters.
+/*
+
+Function calculation, call target method, accepted as parameter,
+this assist method for convert input parameters.
+Calculation function Y[i] = F( X[i] ), plus some additional service
+methods: minmum, maximum, average, median.
+TODO:
+Replace to JVM/Hardware accelerated methods.
+
+*/
 
 package charts.model;
 

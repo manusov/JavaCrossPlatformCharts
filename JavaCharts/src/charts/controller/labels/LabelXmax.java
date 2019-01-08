@@ -1,5 +1,10 @@
-// Label description class: select maximum X.
-// This label is name of field, located near associated text input field.
+/*
+
+Label description class: select maximum X.
+This label is name of text input field, 
+this label located near associated text input field.
+
+*/
 
 package charts.controller.labels;
 

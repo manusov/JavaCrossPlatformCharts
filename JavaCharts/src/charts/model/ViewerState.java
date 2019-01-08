@@ -1,5 +1,10 @@
-// Class for adjust drawings y=f(x) visualization parameters.
-// See detail parameters comments at abstract Function.java class.
+/*
+
+Class for adjust drawings y=f(x) visualization parameters,
+this class provides storage for default constants and current settings.
+See detail parameters comments at abstract Function.java class.
+
+*/
 
 package charts.model;
 

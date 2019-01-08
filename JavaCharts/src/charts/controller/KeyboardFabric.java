@@ -1,4 +1,10 @@
-// Fabric class for build control buttons panel.
+/*
+
+Fabric class for build control buttons panel.
+Method accepts panel type (yet supported SIMPLE only), model (FunctionCore),
+views (DisplayPanel, StatusPanel). Returns application panel.
+
+*/
 
 package charts.controller;
 
@@ -70,7 +76,6 @@ public static JPanel[] getKeyboardPanels
     JButton[] b = new JButton[nb];
     
     // combo boxes with associated labels
-    
     DescriptLabelConst[] comboLabelsList = kp.getComboLabelsList();
     DescriptCombo[] comboList = kp.getComboList();
     int ncl = comboLabelsList.length;
@@ -122,7 +127,6 @@ public static JPanel[] getKeyboardPanels
         }
 
     // text fields with associated labels
-    
     DescriptLabelConst[] fieldsLabelsList = kp.getFieldsLabelsList();
     DescriptField[] fieldsList = kp.getFieldsList();
     int nfl = fieldsLabelsList.length;
@@ -175,7 +179,6 @@ public static JPanel[] getKeyboardPanels
         }
     
     // buttons
-    
     // DescriptButton[] buttonsList = kp.getButtonsList();
     // int nb = buttonsList.length;
     // JButton[] b = new JButton[nb];
@@ -226,7 +229,6 @@ public static JPanel[] getKeyboardPanels
         }
     
     // layout manager
-    
     SpringLayout s = new SpringLayout();
     kp.setLayout(s);
     

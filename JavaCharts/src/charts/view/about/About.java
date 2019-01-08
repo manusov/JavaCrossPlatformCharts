@@ -1,10 +1,16 @@
-// Class with Vendor, Product, Version, Release Date, Icon information.
+/*
+
+Class with Vendor, Product, Version, Release Date, Icon information.
+This data block is update point for application version incremented,
+also contains GUI window geometry sizes.
+
+*/
 
 package charts.view.about;
 
 public class About 
 {
-private final static String VERSION_NAME = "v0.07";
+private final static String VERSION_NAME = "v0.08";
 private final static String VENDOR_NAME  = "(C)2018 IC Book Labs";
 private final static String SHORT_NAME   = "Charts " + VERSION_NAME;
 private final static String LONG_NAME    = "Java " + SHORT_NAME;

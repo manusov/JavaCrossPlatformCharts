@@ -1,4 +1,9 @@
-// Button description class: move down, Y+, shift X-axis up.
+/*
+
+Button description class: move up, Y+, shift X-axis up.
+This button scrolls view field up, yet not supported.
+
+*/
 
 package charts.controller.buttons;
 

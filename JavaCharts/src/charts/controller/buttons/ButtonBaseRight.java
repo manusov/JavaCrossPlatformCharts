@@ -1,4 +1,9 @@
-// Button description class: move right, X+, shift Y-axis right.
+/*
+
+Button description class: move right, X+, shift Y-axis right.
+This button scrolls view field right, yet not supported.
+
+*/
 
 package charts.controller.buttons;
 

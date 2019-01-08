@@ -1,4 +1,10 @@
-// Button description class: decrease tabulation step.
+/*
+
+Button description class: decrease tabulation step.
+This button decrements number of function tabulation steps per interval,
+decrease function visualization quality.
+
+*/
 
 package charts.controller.buttons;
 

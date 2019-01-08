@@ -1,4 +1,9 @@
-// Combo box description class: select function.
+/*
+
+Combo box description class: select function.
+This combo box selects mathematics function for visualization.
+
+*/
 
 package charts.controller.combo;
 
@@ -8,6 +13,7 @@ import java.awt.event.KeyEvent;
 
 public class ComboMathFunction extends DescriptCombo 
 {
+// this default list replaced by real math functions list, by class constructor
 private static String[] valuesList = 
     { "test1" , "test2" };
 

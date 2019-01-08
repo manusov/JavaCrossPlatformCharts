@@ -1,4 +1,9 @@
-// Button description class: clear button, set defaults.
+/*
+
+Button description class: clear button, set defaults.
+This button set drawings viewer options to defaults.
+
+*/
 
 package charts.controller.buttons;
 

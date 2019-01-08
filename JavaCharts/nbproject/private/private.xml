@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Projects/project_drawings/JavaCharts/src/charts/Charts.java</file>
-            <file>file:/C:/Projects/project_drawings/JavaCharts/src/charts/view/rootmenu/RootFrame.java</file>
+            <file>file:/C:/3-java/project_drawings/JavaCharts/src/charts/view/rootmenu/HandlerAbout.java</file>
+            <file>file:/C:/3-java/project_drawings/JavaCharts/src/charts/Charts.java</file>
+            <file>file:/C:/3-java/project_drawings/JavaCharts/src/charts/view/rootmenu/HandlerExit.java</file>
+            <file>file:/C:/3-java/project_drawings/JavaCharts/src/charts/view/rootmenu/RootFrame.java</file>
         </group>
     </open-files>
 </project-private>

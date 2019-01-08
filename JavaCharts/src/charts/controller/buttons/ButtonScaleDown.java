@@ -1,4 +1,9 @@
-// Button description class: decrease vertical scale.
+/*
+
+Button description class: decrease vertical scale.
+This buttons decrements ratio: value per vertical interval.
+
+*/
 
 package charts.controller.buttons;
 

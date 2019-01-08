@@ -1,4 +1,9 @@
-// Abstract class for function description template.
+/*
+
+Abstract class for mathematics function Y=F(X) description template.
+Get calculated function results and function visualization optimal conditions.
+
+*/
 
 package charts.model;
 

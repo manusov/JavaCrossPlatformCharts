@@ -1,4 +1,9 @@
-// Action handler for map PC keyboard keys to calculator keyboard buttons.
+/*
+
+Action handler for map PC keyboard keys to viewer control keyboard buttons.
+This functionality yet supported for buttons and combo boxes.
+
+*/
 
 package charts.controller;
 

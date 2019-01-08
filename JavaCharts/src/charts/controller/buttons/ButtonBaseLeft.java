@@ -1,4 +1,9 @@
-// Button description class: move left, X-, shift Y-axis left.
+/*
+
+Button description class: move left, X-, shift Y-axis left.
+This button scrolls view field left, yet not supported.
+
+*/
 
 package charts.controller.buttons;
 

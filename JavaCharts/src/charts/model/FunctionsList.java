@@ -1,8 +1,13 @@
-// List of math. functions with calculation method, names and
-// default drawing parameters.
-// IMPORTANT NOTE FOR TABULATION CYCLES:
-// x += dx;  // BAD: this causes additivity of approximation error
-// x = x1 + dx * i;  // IMPROVE PRECISION QUALITY
+/*
+
+List of math. functions with calculation method, names and
+default drawing parameters. One class per each mathematics function.
+
+IMPORTANT NOTE FOR TABULATION CYCLES:
+x += dx;  // BAD: this causes additivity of approximation error
+x = x1 + dx * i;  // IMPROVE PRECISION QUALITY
+
+*/
 
 package charts.model;
 

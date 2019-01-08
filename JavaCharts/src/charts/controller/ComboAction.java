@@ -1,6 +1,15 @@
-// Action listener (events handler) class for combo boxes click.
-// This listener connected to combo boxes by builder 
-// in the KeyboardFabric class.
+/*
+
+Action listener (events handler) class for combo boxes click.
+This listener connected to combo boxes by builder 
+in the KeyboardFabric class.
+When combo box action performed:
+1) detect event,
+2) execute operation, associated with this combo box,
+3) refresh Display and Status components, 
+4) set buttons (not combo boxes) enable/disable by result of operation.
+
+*/
 
 package charts.controller;
 
@@ -42,7 +51,7 @@ public ComboAction ( DescriptCombo[] dc , FunctionCore fc ,
         try {
             selector = Integer.decode(command);
             }
-        catch (Exception e)
+        catch (Exception e)  // handling error when convert string to number
             {
             selector = -1;    // force wrong combo ID if error
             }

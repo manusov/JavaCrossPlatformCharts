@@ -1,5 +1,12 @@
-// Fabric class for build status view panel.
-// Yet only one mode supported: DRAWS.SIMPLE.
+/*
+
+Fabric class for build status view panel.
+Yet only one mode supported: DRAWS.SIMPLE,
+for this mode, data source = calculate mathematics functions,
+alternative variants is: data file, real-time JVM benchmarks,
+real-time native benchmarks.
+
+*/
 
 package charts.view.drawstatus;
 

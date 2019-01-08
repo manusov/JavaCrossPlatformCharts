@@ -1,5 +1,10 @@
-// Description for control buttons panel.
-// JPanel class with additional function: store lists of JComponents.
+/*
+
+Description for control buttons panel.
+JPanel class with additional function: store lists of JComponents.
+This class used as template for object(s), returned by KeyboardFabric.
+
+*/
 
 package charts.controller;
 

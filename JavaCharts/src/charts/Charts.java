@@ -48,6 +48,13 @@ TODO (maraphon mode after existed valid version v0.01):
 v0.07. BUG FIXED: graphics window corrupted when work main menu.
        Under verify. RootFrame.java. Marker "v0.07".
 
+v0.08. Improve comments. Required adaptation this application for
+       benchmarks drawings: 4 modes = { math, file, java, native }.
+       Fix some IDE warnings.
+
+Required redesign and functional upgrade for use this application for
+benchmarks drawings and some applications integrator.
+
 */
 
 package charts;

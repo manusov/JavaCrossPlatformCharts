@@ -1,4 +1,10 @@
-// Text field description class: input maximum X value.
+/*
+
+Text field description class: input maximum X value.
+This text field used for select function draw X maximum (right),
+yet not supported.
+
+*/
 
 package charts.controller.fields;
 

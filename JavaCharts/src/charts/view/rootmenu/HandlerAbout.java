@@ -1,10 +1,13 @@
-// Action handler for root menu: info about application.
-// This action listener (handler) connected to root menu item "About"
-// in the RootFrame constructor.
+/*
+
+Action handler for root menu: info about application.
+This action listener (handler) connected to root menu item "About"
+in the RootFrame constructor.
+
+*/
 
 package charts.view.rootmenu;
 
-import charts.view.about.About;
 import charts.view.about.BuildAbout;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
@@ -26,6 +29,5 @@ HandlerAbout(JFrame x1)
     final JDialog dialog = about.createDialog( null );
     dialog.setLocationRelativeTo( parentFrame );
     dialog.setVisible(true);    
-
     }  
 }

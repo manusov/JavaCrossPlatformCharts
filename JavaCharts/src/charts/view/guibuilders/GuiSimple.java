@@ -1,4 +1,10 @@
-// GUI builder class.
+/*
+
+GUI builder class.
+Build application screen from some components-panels, 
+include layout management.
+
+*/
 
 package charts.view.guibuilders;
 
@@ -17,15 +23,18 @@ public Dimension getGuiSize()
     return new Dimension(780, 580); 
     }
 
-// Method for build GUI in the frame, connect 3 panels.
-//
-// frame    = common GUI frame for application
-// display  = array of display panels (central, with math. function graphs),
-//            yet only one panel = display[0]
-// status  = array of status panels (down, with math. function statistics),
-//            yet only one panel = status[0]
-// keyboard = array of control elements panels (right, with buttons and other
-//            control elements), yet only one panel = keyboard[0]
+/*
+
+ Method for build GUI in the frame, connect 3 panels.
+
+ frame    = common GUI frame for application
+ display  = array of display panels (central, with math. function graphs),
+            yet only one panel = display[0]
+ status   = array of status panels (down, with math. function statistics),
+            yet only one panel = status[0]
+ keyboard = array of control elements panels (right, with buttons and other
+            control elements), yet only one panel = keyboard[0]
+*/
 
 public void setGui( JFrame frame, 
                     JPanel[] display, JPanel[] status, JPanel[] keyboard )
@@ -48,7 +57,6 @@ public void setGui( JFrame frame,
     c.setLayout(s);
     
     // down status panel with information strings
-    
     s.putConstraint
         ( SpringLayout.SOUTH , status[0] ,  -2 , SpringLayout.SOUTH, c );
     s.putConstraint
@@ -60,7 +68,6 @@ public void setGui( JFrame frame,
     c.add(status[0]);
     
     // right control panel with buttons
-    
     s.putConstraint
         ( SpringLayout.NORTH , keyboard[0] ,   2 , SpringLayout.NORTH, c );
     s.putConstraint
@@ -72,7 +79,6 @@ public void setGui( JFrame frame,
     c.add(keyboard[0]);
     
     // central display panel with drawings y=f(x)
-    
     s.putConstraint
         ( SpringLayout.NORTH , display[0] ,  7  , SpringLayout.NORTH, c );
     s.putConstraint
@@ -83,6 +89,7 @@ public void setGui( JFrame frame,
         ( SpringLayout.EAST  , display[0] , -140  , SpringLayout.EAST, c );
     c.add(display[0]);
         
+    // Set size for this GUI frame
     frame.setSize(getGuiSize());
     
     }

@@ -1,4 +1,9 @@
-// Abstract class for combo box description template.
+/*
+
+Abstract class for combo box description template.
+This is template for real combo boxes descriptions.
+
+*/
 
 package charts.controller;
 
