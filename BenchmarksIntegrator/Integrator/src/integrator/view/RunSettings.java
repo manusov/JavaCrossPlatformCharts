@@ -1,6 +1,16 @@
+/*
+
+Run settings window (left down) class:
+1) Builder.
+2) Components lists.
+3) Events listeners.
+4) Window logic.
+
+*/
+
 package integrator.view;
 
-import integrator.controller.Function;
+import integrator.model.Function;
 import integrator.controller.Integrator;
 import integrator.controller.RunInterface;
 import integrator.controller.RunInterface.CONTROLS;

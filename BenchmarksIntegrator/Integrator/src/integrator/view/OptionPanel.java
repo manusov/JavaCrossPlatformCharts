@@ -1,3 +1,9 @@
+/*
+
+Abstract class for option panel description.
+
+*/
+
 package integrator.view;
 
 import java.awt.Color;

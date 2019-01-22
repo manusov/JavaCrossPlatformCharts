@@ -1,3 +1,14 @@
+/*
+
+Class for up-string root menu.
+1) Builder.
+2) Components lists.
+3) Events listeners.
+4) Functions handlers.
+5) Child processes run and stop logic.
+
+*/
+
 package integrator.view;
 
 import integrator.controller.Integrator;

@@ -1,5 +1,13 @@
+/*
+
+Class-controller for native application benchmarks scenario.
+UNDER CONSTRUCTION.
+
+*/
+
 package integrator.controller;
 
+import integrator.model.Function;
 import java.math.BigDecimal;
 
 public class NativeRun implements RunInterface

@@ -1,3 +1,10 @@
+/*
+
+Draw function Y=F(X) window class:
+Draw grids, axis, function Y=F(X) logic.
+
+*/
+
 package integrator.view;
 
 import integrator.controller.Integrator;

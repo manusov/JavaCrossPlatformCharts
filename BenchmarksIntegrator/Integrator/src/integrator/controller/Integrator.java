@@ -18,15 +18,17 @@ ROADMAP.
 13)+ ViewSettings.java, adjust for math mode only, current functionality. Yet without listeners.
 14)+ Draw panel, for math.
 15)+ Function select checkbox.
+16)+ Move "Function" from controller to model.
 
-16)  Log panel, for math.
-17)  Table panel, for math.
+17)  All supported widgets, by mouse. Include mark unsupported as gray.
+18)  All supported widgets, by keyboard.
 
-18)  All supported widgets, by mouse. Include mark unsupported as gray.
-19)  All supported widgets, by keyboard.
-20)  Divider location.
-21)  GUI window resize.
-22)  Draw bugs, yet set not resizable.
+19)  Log panel, for math.
+20)  Table panel, for math.
+
+21)  Divider location.
+22)  GUI window resize.
+23)  Draw bugs, yet set not resizable.
 
 */
 
@@ -94,7 +96,7 @@ public static void assignRunInterface( DataKeys x )
 // application entry point means start controller ( as part of MVC pattern )
 public static void main( String[] args ) 
     {
-    // start model
+    // start model(s) by associated controller(s)
     ri1 = new MathRun();
     ri2 = new FileRun();
     ri3 = new JvmRun();

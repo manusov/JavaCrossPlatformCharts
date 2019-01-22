@@ -1,5 +1,18 @@
+/*
+
+Interface for function Y=F(X) drawings scenario.
+4 variants of drawings:
+ 1) Mathematics function.
+ 2) Data from file.
+ 3) JVM benchmarks.
+ 4) Native application benchmarks.
+must support this interface for drawings process unification.
+
+*/
+
 package integrator.controller;
 
+import integrator.model.Function;
 import java.math.BigDecimal;
 
 public interface RunInterface 

@@ -1,5 +1,13 @@
+/*
+
+Class-controller for drawings file data scenario.
+UNDER CONSTRUCTION.
+
+*/
+
 package integrator.controller;
 
+import integrator.model.Function;
 import java.math.BigDecimal;
 
 public class FileRun implements RunInterface
