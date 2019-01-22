@@ -38,6 +38,9 @@ public Display()
 
 class DisplayPanel extends JPanel
 {
+private int tempx = 0;   // DEBUG, REPLACE THIS TO PARTIAL-BOUND ADAPTIVE DRAWS
+private int tempy = 0;   // DEBUG, REPLACE THIS TO PARTIAL-BOUND ADAPTIVE DRAWS
+
     
 @Override public void paint( Graphics g )
     {
@@ -102,6 +105,20 @@ class DisplayPanel extends JPanel
     
     // start drawings, fill background
     Rectangle r = g.getClipBounds();   // locate area
+    
+    // DEBUG, REPLACE THIS TO PARTIAL-BOUND ADAPTIVE DRAWS
+    // THIS BOUNDS CHANGES DYNAMICALLY !
+    if ( r.width > tempx )  tempx = r.width;
+    if ( r.height > tempy ) tempy = r.height;
+    r.x = 0;
+    r.y = 0;
+    r.width = tempx;
+    r.height = tempy;
+    // DEBUG
+    // System.out.println
+    // ("" + r.x + " " + r.y + " " + r.width + " " + r.height );
+    // DEBUG
+    
     g.setColor( backgroundColor );     // get background color for draw area
     g.setFont( axisFont );
     g.fillRect( r.x , r.y ,  r.width , r.height );

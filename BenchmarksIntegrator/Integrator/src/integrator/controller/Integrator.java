@@ -19,16 +19,23 @@ ROADMAP.
 14)+ Draw panel, for math.
 15)+ Function select checkbox.
 16)+ Move "Function" from controller to model.
+17)+ Drawing window corruption by tool tips.
+     Prevent always and full redraw because time delays ?
+     Listener for tooltip or improve draw window redrawability ?
+18)+ All supported widgets, by mouse. Include mark unsupported as gray.
 
-17)  All supported widgets, by mouse. Include mark unsupported as gray.
-18)  All supported widgets, by keyboard.
+19)  Log panel, for math. Design it place in the scenario.
+20)  Table panel, for math. Design it place in the scenario.
 
-19)  Log panel, for math.
-20)  Table panel, for math.
-
-21)  Divider location.
-22)  GUI window resize.
+21)  Divider location and size make changeable.
+22)  GUI window resize bugs.
 23)  Draw bugs, yet set not resizable.
+24)  Use TAB-selected active widgets instead hotkeys.
+     All supported widgets, by keyboard, resolve conflicts with default keys:
+     cursor control, PgUp, PgDn, Home, End,
+     remember many widgets, for example native mode, 
+     don't use hotkeys for it, use TAB focus ?
+25)  Adaptive drawings instead find maximum size.
 
 */
 

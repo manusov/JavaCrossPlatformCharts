@@ -20,7 +20,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+// import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -317,7 +317,7 @@ class ButtonBaseUp extends DescriptButton
 @Override public String getName() { return "base Y+"; }
 @Override public String getText() { return "move up"; }
 @Override public int[] getKeys()  
-    { return new int[] { KeyEvent.VK_UP }; }
+    { return null; }  // new int[] { KeyEvent.VK_UP }; }
 @Override public void buttonAction( RunInterface ri )
     { ri.sendControl( CONTROLS.X_AXIS_UP ); }
 @Override public Font getCustomFont()  { return SMALL_CUSTOM_FONT; }
@@ -328,7 +328,7 @@ class ButtonBaseDown extends DescriptButton
 @Override public String getName() { return "Y-"; }
 @Override public String getText() { return "move down"; }
 @Override public int[] getKeys()  
-    { return new int[] { KeyEvent.VK_DOWN }; }
+    { return null; }  // new int[] { KeyEvent.VK_DOWN }; }
 @Override public void buttonAction( RunInterface ri )
     { ri.sendControl( CONTROLS.X_AXIS_DOWN ); }
 @Override public Font getCustomFont()  { return SMALL_CUSTOM_FONT; }
@@ -339,7 +339,7 @@ class ButtonBaseLeft extends DescriptButton
 @Override public String getName() { return "X-"; }
 @Override public String getText() { return "move left"; }
 @Override public int[] getKeys()  
-    { return new int[] { KeyEvent.VK_LEFT }; }
+    { return null; }  // new int[] { KeyEvent.VK_LEFT }; }
 @Override public void buttonAction( RunInterface ri )
     { ri.sendControl( CONTROLS.Y_AXIS_LEFT ); }
 @Override public Font getCustomFont()  { return SMALL_CUSTOM_FONT; }
@@ -350,7 +350,7 @@ class ButtonBaseRight extends DescriptButton
 @Override public String getName() { return "X+"; }
 @Override public String getText() { return "move right"; }
 @Override public int[] getKeys()  
-    { return new int[] { KeyEvent.VK_LEFT }; }
+    { return null; }  // new int[] { KeyEvent.VK_RIGHT }; }
 @Override public void buttonAction( RunInterface ri )
     { ri.sendControl( CONTROLS.Y_AXIS_RIGHT ); }
 @Override public Font getCustomFont()  { return SMALL_CUSTOM_FONT; }
@@ -361,7 +361,7 @@ class ButtonScaleUp extends DescriptButton
 @Override public String getName() { return "scale Y+"; }
 @Override public String getText() { return "increase vertical scale"; }
 @Override public int[] getKeys()  
-    { return new int[] { KeyEvent.VK_PAGE_UP }; }
+    { return null; }  // new int[] { KeyEvent.VK_PAGE_UP }; }
 @Override public void buttonAction( RunInterface ri )
     { ri.sendControl( CONTROLS.Y_SCALE_INC ); }
 @Override public Font getCustomFont()  { return SMALL_CUSTOM_FONT; }
@@ -372,7 +372,7 @@ class ButtonScaleDown extends DescriptButton
 @Override public String getName() { return "Y-"; }
 @Override public String getText() { return "decrease vertical scale"; }
 @Override public int[] getKeys()  
-    { return new int[] { KeyEvent.VK_PAGE_DOWN }; }
+    { return null; }  // new int[] { KeyEvent.VK_PAGE_DOWN }; }
 @Override public void buttonAction( RunInterface ri )
     { ri.sendControl( CONTROLS.Y_SCALE_DEC ); }
 @Override public Font getCustomFont()  { return SMALL_CUSTOM_FONT; }
@@ -383,7 +383,7 @@ class ButtonScaleLeft extends DescriptButton
 @Override public String getName() { return "X-"; }
 @Override public String getText() { return "decrease horizontal scale"; }
 @Override public int[] getKeys()  
-    { return new int[] { KeyEvent.VK_HOME }; }
+    { return null; }  // new int[] { KeyEvent.VK_HOME }; }
 @Override public void buttonAction( RunInterface ri )
     { ri.sendControl( CONTROLS.X_SCALE_DEC ); }
 @Override public Font getCustomFont()  { return SMALL_CUSTOM_FONT; }
@@ -394,7 +394,7 @@ class ButtonScaleRight extends DescriptButton
 @Override public String getName() { return "X+"; }
 @Override public String getText() { return "increase horizontal scale"; }
 @Override public int[] getKeys()  
-    { return new int[] { KeyEvent.VK_END }; }
+    { return null; }  // new int[] { KeyEvent.VK_END }; }
 @Override public void buttonAction( RunInterface ri )
     { ri.sendControl( CONTROLS.X_SCALE_INC ); }
 @Override public Font getCustomFont()  { return SMALL_CUSTOM_FONT; }
@@ -405,7 +405,7 @@ class ButtonTabUp extends DescriptButton
 @Override public String getName() { return "Steps +"; }
 @Override public String getText() { return "increase function quality"; }
 @Override public int[] getKeys()  
-    { return new int[] { KeyEvent.VK_ADD }; }
+    { return null; }  // new int[] { KeyEvent.VK_ADD }; }
 @Override public void buttonAction( RunInterface ri )
     { ri.sendControl( CONTROLS.TAB_INC ); }
 }
@@ -415,7 +415,7 @@ class ButtonTabDown extends DescriptButton
 @Override public String getName() { return "Steps -"; }
 @Override public String getText() { return "decrease function quality"; }
 @Override public int[] getKeys()  
-    { return new int[] { KeyEvent.VK_SUBTRACT }; }
+    { return null; }  // new int[] { KeyEvent.VK_SUBTRACT }; }
 @Override public void buttonAction( RunInterface ri )
     { ri.sendControl( CONTROLS.TAB_DEC ); }
 }
@@ -425,7 +425,7 @@ class ButtonReset extends DescriptButton
 @Override public String getName() { return "Reset"; }
 @Override public String getText() { return "restore default parameters"; }
 @Override public int[] getKeys()  
-    { return new int[] { KeyEvent.VK_ESCAPE }; }
+    { return null; }  // new int[] { KeyEvent.VK_ESCAPE }; }
 @Override public void buttonAction( RunInterface ri )
     { ri.sendControl( CONTROLS.RESET ); }
 @Override public Color getCustomColor() { return CLR_CUSTOM_COLOR; }
@@ -435,7 +435,7 @@ class ButtonReset extends DescriptButton
 class LabelColorScheme extends DescriptLabelConst
 {
 @Override public String getName() { return "Color"; }
-@Override public String getText() { return "select background color, C key"; }
+@Override public String getText() { return "select background color"; } // , C key"; }
 }
 
 class ComboColorScheme extends DescriptCombo 
@@ -443,9 +443,9 @@ class ComboColorScheme extends DescriptCombo
 @Override public String[] getValues()
     { return new String[] { "Black" , "White" }; }
 @Override public String getText()
-    { return "select background color, C key"; }
+    { return "select background color"; }  // , C key"; }
 @Override public int[] getKeys()
-    { return new int[] { KeyEvent.VK_C }; }
+    { return null; }  // new int[] { KeyEvent.VK_C }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     GCOLOR[] values = GCOLOR.values();
@@ -487,7 +487,7 @@ private String value = "";
 @Override public void setValue(String s) { value = s;     }
 @Override public int getSize()           { return 10;     }
 @Override public String getText()        { return "argument X start value"; }
-@Override public int[] getKeys()      { return new int[] { KeyEvent.VK_X }; }
+@Override public int[] getKeys()         { return null;   }  // new int[] { KeyEvent.VK_X }; }
 @Override public void fieldAction( RunInterface ri ) { }
 }
 
@@ -498,7 +498,7 @@ private String value = "";
 @Override public void setValue(String s) { value = s;     }
 @Override public int getSize()           { return 10;     }
 @Override public String getText()        { return "argument X end value"; }
-@Override public int[] getKeys()      { return new int[] { KeyEvent.VK_Z }; }
+@Override public int[] getKeys()         { return null;   }  //  new int[] { KeyEvent.VK_Z }; }
 @Override public void fieldAction( RunInterface ri ) { }
 }
 
@@ -509,7 +509,7 @@ private String value = "";
 @Override public void setValue(String s) { value = s;     }
 @Override public int getSize()           { return 10;     }
 @Override public String getText()     { return "function Y=F(X) view down"; }
-@Override public int[] getKeys()      { return new int[] { KeyEvent.VK_Y }; }
+@Override public int[] getKeys()      { return null; }  // new int[] { KeyEvent.VK_Y }; }
 @Override public void fieldAction( RunInterface ri ) { }
 }
 
@@ -520,6 +520,6 @@ private String value = "";
 @Override public void setValue(String s) { value = s;     }
 @Override public int getSize()           { return 10;     }
 @Override public String getText()     { return "function Y=F(X) view up";   }
-@Override public int[] getKeys()      { return new int[] { KeyEvent.VK_T }; }
+@Override public int[] getKeys()      { return null; }  // new int[] { KeyEvent.VK_T }; }
 @Override public void fieldAction( RunInterface ri ) { }
 }

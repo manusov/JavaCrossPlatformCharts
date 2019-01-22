@@ -165,9 +165,9 @@ public void addComponents()
         // set custom color for button name string
         Color customColor = getButtonsList()[i].getCustomColor();
         if ( customColor != null )
-            { b[i].setForeground(customColor); }
+            { b[i].setForeground( customColor ); }
         // set identifier, used by handler 
-        b[i].setActionCommand(stringId);
+        b[i].setActionCommand( stringId );
         // setup handler for this button
         b[i].addActionListener( buttonsListener );
         // setup keyboard key(s) for this button
@@ -228,7 +228,5 @@ public void addComponents()
         add( b[i] );  // add button to panel
         }
     }
-
-
 
 }

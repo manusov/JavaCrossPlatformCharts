@@ -19,7 +19,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+// import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -516,9 +516,9 @@ private static void layoutSingleButtons
 class ButtonMathRun extends DescriptButton
 {
 @Override public String getName() { return "Run"; }
-@Override public String getText() { return "run function revisual, ENTER key"; }
+@Override public String getText() { return "run function revisual"; }  // , ENTER key"; }
 @Override public int[] getKeys()  
-    { return new int[] { KeyEvent.VK_ENTER }; }
+    { return null; }  // new int[] { KeyEvent.VK_ENTER }; }
 @Override public void buttonAction( RunInterface ri )
     { ri.sendControl( CONTROLS.RUN ); }
 @Override public Font getCustomFont()  { return SMALL_CUSTOM_FONT; }
@@ -527,7 +527,7 @@ class ButtonMathRun extends DescriptButton
 class LabelMathFunction extends DescriptLabelConst
 {
 @Override public String getName() { return "Function Y=F(X)"; }
-@Override public String getText() { return "select function Y=F(X), M key"; }
+@Override public String getText() { return "select function Y=F(X)"; }  // , M key"; }
 }
 
 class ComboMathFunction extends DescriptCombo 
@@ -551,8 +551,8 @@ public ComboMathFunction()
         }
     }
 @Override public String[] getValues()  { return valuesList; }
-@Override public String getText()      { return "select function, M key"; }
-@Override public int[] getKeys()       { return new int[] { KeyEvent.VK_M }; }
+@Override public String getText()      { return "select function"; }  // , M key"; }
+@Override public int[] getKeys()       { return null; }  // new int[] { KeyEvent.VK_M }; }
 @Override public void comboAction( RunInterface ri, int index )
     { ri.sendFunction( index ); }
 }
@@ -563,8 +563,8 @@ public ComboMathFunction()
 class ButtonFileLoad extends DescriptButton
 {
 @Override public String getName() { return "Load"; }
-@Override public String getText() { return "load text data file, L key"; }
-@Override public int[] getKeys()  { return new int[] { KeyEvent.VK_ENTER }; }
+@Override public String getText() { return "load text data file"; } // , L key"; }
+@Override public int[] getKeys()  { return null; }  // new int[] { KeyEvent.VK_ENTER }; }
 @Override public void buttonAction( RunInterface ri )
         { ri.sendControl( CONTROLS.RUN ); }
 @Override public Font getCustomFont()  { return SMALL_CUSTOM_FONT; }
@@ -573,8 +573,8 @@ class ButtonFileLoad extends DescriptButton
 class ButtonFileRun extends DescriptButton
 {
 @Override public String getName() { return "Run"; }
-@Override public String getText() { return "show function, ENTER key"; }
-@Override public int[] getKeys()  { return new int[] { KeyEvent.VK_ENTER }; }
+@Override public String getText() { return "show function"; }  // , ENTER key"; }
+@Override public int[] getKeys()  { return null; }  // new int[] { KeyEvent.VK_ENTER }; }
 @Override public void buttonAction( RunInterface ri )
         { ri.sendControl( CONTROLS.RUN ); }
 @Override public Font getCustomFont()  { return SMALL_CUSTOM_FONT; }
@@ -586,8 +586,8 @@ class ButtonFileRun extends DescriptButton
 class ButtonJvmRun extends DescriptButton
 {
 @Override public String getName() { return "Run"; }
-@Override public String getText() { return "run JVM benchmarks, ENTER key"; }
-@Override public int[] getKeys()  { return new int[] { KeyEvent.VK_ENTER }; }
+@Override public String getText() { return "run JVM benchmarks"; }  // , ENTER key"; }
+@Override public int[] getKeys()  { return null; }  // new int[] { KeyEvent.VK_ENTER }; }
 @Override public void buttonAction( RunInterface ri )
         { ri.sendControl( CONTROLS.RUN ); }
 @Override public Font getCustomFont()  { return SMALL_CUSTOM_FONT; }
@@ -597,43 +597,43 @@ class LabelJvmArray extends DescriptLabelConst
 {
 @Override public String getName() { return "Array"; }
 @Override public String getText() 
-    { return "select array size for benchmarks, A key"; }
+    { return "select array size for benchmarks"; }  // , A key"; }
 }
 
 class LabelJvmThreads extends DescriptLabelConst
 {
 @Override public String getName() { return "Threads"; }
 @Override public String getText() 
-    { return "number of execution threads, T key"; }
+    { return "number of execution threads"; }  //, T key"; }
 }
 
 class LabelJvmRepeats extends DescriptLabelConst
 {
 @Override public String getName() { return "Repeats"; }
 @Override public String getText() 
-    { return "number of measurement repeats, R key"; }
+    { return "number of measurement repeats"; }  //, R key"; }
 }
 
 class LabelJvmOperation extends DescriptLabelConst
 {
 @Override public String getName() { return "Operation"; }
 @Override public String getText() 
-    { return "mathematics operation select, O key"; }
+    { return "mathematics operation select"; }  //, O key"; }
 }
 
 class LabelJvmOperand extends DescriptLabelConst
 {
 @Override public String getName() { return "Operand"; }
 @Override public String getText() 
-    { return "floating-point operand width, P key"; }
+    { return "floating-point operand width"; }  //, P key"; }
 }
 
 class ComboJvmArray extends DescriptCombo
 {
 @Override public String[] getValues()  { return new String[] { "" }; }
 @Override public String getText()      
-    { return "select array size for benchmarks, A key"; }
-@Override public int[] getKeys()  { return new int[] { KeyEvent.VK_A  }; }
+    { return "select array size for benchmarks"; }  //, A key"; }
+@Override public int[] getKeys()  { return null; }  // new int[] { KeyEvent.VK_A  }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     // ... under construction ...
@@ -644,8 +644,8 @@ class ComboJvmThreads extends DescriptCombo
 {
 @Override public String[] getValues()  { return new String[] { "" }; }
 @Override public String getText()      
-    { return "number of threads for benchmarks, T key"; }
-@Override public int[] getKeys()  { return new int[] { KeyEvent.VK_T  }; }
+    { return "number of threads for benchmarks"; }  //, T key"; }
+@Override public int[] getKeys()  { return null; }  // new int[] { KeyEvent.VK_T  }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     // ... under construction ...
@@ -656,8 +656,8 @@ class ComboJvmRepeats extends DescriptCombo
 {
 @Override public String[] getValues()  { return new String[] { "" }; }
 @Override public String getText()      
-    { return "number of measurement repeats, R key"; }
-@Override public int[] getKeys()  { return new int[] { KeyEvent.VK_R  }; }
+    { return "number of measurement repeats"; }  //, R key"; }
+@Override public int[] getKeys()  { return null; }  // new int[] { KeyEvent.VK_R  }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     // ... under construction ...
@@ -668,8 +668,8 @@ class ComboJvmOperation extends DescriptCombo
 {
 @Override public String[] getValues()  { return new String[] { "" }; }
 @Override public String getText()      
-    { return "mathematics operation select, O key"; }
-@Override public int[] getKeys()  { return new int[] { KeyEvent.VK_O  }; }
+    { return "mathematics operation select"; }  //, O key"; }
+@Override public int[] getKeys()  { return null; }  // new int[] { KeyEvent.VK_O  }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     // ... under construction ...
@@ -680,8 +680,8 @@ class ComboJvmOperand extends DescriptCombo
 {
 @Override public String[] getValues()  { return new String[] { "" }; }
 @Override public String getText()      
-    { return "floating point operand width select, P key"; }
-@Override public int[] getKeys()  { return new int[] { KeyEvent.VK_P  }; }
+    { return "floating point operand width select"; }  //, P key"; }
+@Override public int[] getKeys()  { return null; }  // new int[] { KeyEvent.VK_P  }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     // ... under construction ...
@@ -694,8 +694,8 @@ class ComboJvmOperand extends DescriptCombo
 class ButtonNativeRun extends DescriptButton
 {
 @Override public String getName() { return "Run"; }
-@Override public String getText() { return "run native benchmarks, ENTER key"; }
-@Override public int[] getKeys()  { return new int[] { KeyEvent.VK_ENTER }; }
+@Override public String getText() { return "run native benchmarks"; }  //, ENTER key"; }
+@Override public int[] getKeys()  { return null; }  // new int[] { KeyEvent.VK_ENTER }; }
 @Override public void buttonAction( RunInterface ri )
         { ri.sendControl( CONTROLS.RUN ); }
 @Override public Font getCustomFont()  { return SMALL_CUSTOM_FONT; }
@@ -712,99 +712,99 @@ class LabelNativeAction extends DescriptLabelConst
 {
 @Override public String getName() { return "Action"; }
 @Override public String getText() 
-    { return "select help, sysinfo or benchmarks, T key"; }
+    { return "select help, sysinfo or benchmarks"; }  //, T key"; }
 }
 
 class LabelNativeTest extends DescriptLabelConst
 {
 @Override public String getName() { return "Test object"; }
 @Override public String getText() 
-    { return "select memory or storage test, O key"; }
+    { return "select memory or storage test"; }  //, O key"; }
 }
 
 class LabelNativeMemory extends DescriptLabelConst
 {
 @Override public String getName() { return "Memory"; }
 @Override public String getText() 
-    { return "select memory. L1-L4, DRAM, M key"; }
+    { return "select memory. L1-L4, DRAM"; }  //, M key"; }
 }
 
 class LabelNativeAsm extends DescriptLabelConst
 {
 @Override public String getName() { return "Assembler"; }
 @Override public String getText() 
-    { return "select CPU instruction set, S key"; }
+    { return "select CPU instruction set"; }  //, S key"; }
 }
 
 class LabelNativeThreads extends DescriptLabelConst
 {
 @Override public String getName() { return "Threads"; }
 @Override public String getText() 
-    { return "set number of threads for benchmark, R key"; }
+    { return "set number of threads for benchmark"; }  //, R key"; }
 }
 
 class LabelNativeHt extends DescriptLabelConst
 {
 @Override public String getName() { return "HT"; }
 @Override public String getText() 
-    { return "set hyper-threading option, H key"; }
+    { return "set hyper-threading option"; }  //, H key"; }
 }
 
 class LabelNativeNuma extends DescriptLabelConst
 {
 @Override public String getName() { return "NUMA"; }
 @Override public String getText() 
-    { return "set NUMA optimization option, N key"; }
+    { return "set NUMA optimization option"; }  //, N key"; }
 }
 
 class LabelNativePage extends DescriptLabelConst
 {
 @Override public String getName() { return "Page"; }
 @Override public String getText() 
-    { return "set paging option, normal or large, P key"; }
+    { return "set paging option, normal or large"; }  //, P key"; }
 }
 
 class LabelNativeRepeats extends DescriptLabelConst
 {
 @Override public String getName() { return "Repeats"; }
 @Override public String getText() 
-    { return "set benchmarks measurement repeats, E key"; }
+    { return "set benchmarks measurement repeats"; }  //, E key"; }
 }
 
 class LabelNativeAdaptive extends DescriptLabelConst
 {
 @Override public String getName() { return "Adaptive"; }
 @Override public String getText() 
-    { return "set adaptive measurement repeats, D key"; }
+    { return "set adaptive measurement repeats"; }  //, D key"; }
 }
 
 class LabelNativeStart extends DescriptLabelConst
 {
 @Override public String getName() { return "Block start"; }
 @Override public String getText() 
-    { return "set start block size, B key"; }
+    { return "set start block size"; }  //, B key"; }
 }
 
 class LabelNativeEnd extends DescriptLabelConst
 {
 @Override public String getName() { return "Block end"; }
 @Override public String getText() 
-    { return "set start block size, L key"; }
+    { return "set end block size"; }  //, L key"; }
 }
 
 class LabelNativeStep extends DescriptLabelConst
 {
 @Override public String getName() { return "Block step"; }
 @Override public String getText() 
-    { return "set start block size, K key"; }
+    { return "set block size step"; }  //, K key"; }
 }
 
 class ComboNativeApplication extends DescriptCombo
 {
 @Override public String[] getValues()  { return new String[] { "" }; }
 @Override public String getText()      
-    { return "native application 32 or 64 bit, A key";   }
-@Override public int[] getKeys() { return new int[] { KeyEvent.VK_A  }; }
+    { return "native application 32 or 64 bit"; }  //, A key";   }
+@Override public int[] getKeys() { return null; }  // new int[] { KeyEvent.VK_A  }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     // ... under construction ...
@@ -815,8 +815,8 @@ class ComboNativeAction extends DescriptCombo
 {
 @Override public String[] getValues()  { return new String[] { "" }; }
 @Override public String getText()      
-    { return "select help, sysinfo or benchmarks, T key";   }
-@Override public int[] getKeys() { return new int[] { KeyEvent.VK_T  }; }
+    { return "select help, sysinfo or benchmarks"; }  //, T key";   }
+@Override public int[] getKeys() { return null; }  // new int[] { KeyEvent.VK_T  }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     // ... under construction ...
@@ -827,8 +827,8 @@ class ComboNativeTest extends DescriptCombo
 {
 @Override public String[] getValues()  { return new String[] { "" }; }
 @Override public String getText()      
-    { return "select memory or storage test, O key";   }
-@Override public int[] getKeys() { return new int[] { KeyEvent.VK_O  }; }
+    { return "select memory or storage test"; }  //, O key";   }
+@Override public int[] getKeys() { return null; }  // new int[] { KeyEvent.VK_O  }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     // ... under construction ...
@@ -839,8 +839,8 @@ class ComboNativeMemory extends DescriptCombo
 {
 @Override public String[] getValues()  { return new String[] { "" }; }
 @Override public String getText()      
-    { return "select memory. L1-L4, DRAM, M key";   }
-@Override public int[] getKeys() { return new int[] { KeyEvent.VK_M  }; }
+    { return "select memory. L1-L4, DRAM"; }  //, M key";   }
+@Override public int[] getKeys() { return null; }  // new int[] { KeyEvent.VK_M  }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     // ... under construction ...
@@ -851,8 +851,8 @@ class ComboNativeAsm extends DescriptCombo
 {
 @Override public String[] getValues()  { return new String[] { "" }; }
 @Override public String getText()      
-    { return "select CPU instruction set, S key";   }
-@Override public int[] getKeys() { return new int[] { KeyEvent.VK_S  }; }
+    { return "select CPU instruction set"; }  //, S key";   }
+@Override public int[] getKeys() { return null; }  // new int[] { KeyEvent.VK_S  }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     // ... under construction ...
@@ -863,8 +863,8 @@ class ComboNativeThreads extends DescriptCombo
 {
 @Override public String[] getValues()  { return new String[] { "" }; }
 @Override public String getText()      
-    { return "set number of threads for benchmark, R key";   }
-@Override public int[] getKeys() { return new int[] { KeyEvent.VK_R  }; }
+    { return "set number of threads for benchmark"; }  //, R key";   }
+@Override public int[] getKeys() { return null; }  // new int[] { KeyEvent.VK_R  }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     // ... under construction ...
@@ -875,8 +875,8 @@ class ComboNativeHt extends DescriptCombo
 {
 @Override public String[] getValues()  { return new String[] { "" }; }
 @Override public String getText()      
-    { return "set hyper-threading option, H key";   }
-@Override public int[] getKeys() { return new int[] { KeyEvent.VK_H  }; }
+    { return "set hyper-threading option"; }  //, H key";   }
+@Override public int[] getKeys() { return null; }  // new int[] { KeyEvent.VK_H  }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     // ... under construction ...
@@ -887,8 +887,8 @@ class ComboNativeNuma extends DescriptCombo
 {
 @Override public String[] getValues()  { return new String[] { "" }; }
 @Override public String getText()      
-    { return "set NUMA optimization option, N key";   }
-@Override public int[] getKeys() { return new int[] { KeyEvent.VK_N  }; }
+    { return "set NUMA optimization option"; }  //, N key";   }
+@Override public int[] getKeys() { return null; }  // new int[] { KeyEvent.VK_N  }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     // ... under construction ...
@@ -899,8 +899,8 @@ class ComboNativePage extends DescriptCombo
 {
 @Override public String[] getValues()  { return new String[] { "" }; }
 @Override public String getText()      
-    { return "set paging option, normal or large, P key";   }
-@Override public int[] getKeys() { return new int[] { KeyEvent.VK_P  }; }
+    { return "set paging option, normal or large"; }  //, P key";   }
+@Override public int[] getKeys() { return null; }  // new int[] { KeyEvent.VK_P  }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     // ... under construction ...
@@ -911,8 +911,8 @@ class ComboNativeRepeats extends DescriptCombo
 {
 @Override public String[] getValues()  { return new String[] { "" }; }
 @Override public String getText()      
-    { return "set benchmarks measurement repeats, E key";   }
-@Override public int[] getKeys() { return new int[] { KeyEvent.VK_E  }; }
+    { return "set benchmarks measurement repeats"; }  //, E key";   }
+@Override public int[] getKeys() { return null; }  // new int[] { KeyEvent.VK_E  }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     // ... under construction ...
@@ -923,8 +923,8 @@ class ComboNativeAdaptive extends DescriptCombo
 {
 @Override public String[] getValues()  { return new String[] { "" }; }
 @Override public String getText()      
-    { return "set adaptive measurement repeats, D key";   }
-@Override public int[] getKeys() { return new int[] { KeyEvent.VK_D  }; }
+    { return "set adaptive measurement repeats"; }  //, D key";   }
+@Override public int[] getKeys() { return null; }  // new int[] { KeyEvent.VK_D  }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     // ... under construction ...
@@ -935,8 +935,8 @@ class ComboNativeStart extends DescriptCombo
 {
 @Override public String[] getValues()  { return new String[] { "" }; }
 @Override public String getText()      
-    { return "set start block size, B key";   }
-@Override public int[] getKeys() { return new int[] { KeyEvent.VK_B  }; }
+    { return "set start block size"; }  //, B key";   }
+@Override public int[] getKeys() { return null; }  // new int[] { KeyEvent.VK_B  }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     // ... under construction ...
@@ -947,8 +947,8 @@ class ComboNativeEnd extends DescriptCombo
 {
 @Override public String[] getValues()  { return new String[] { "" }; }
 @Override public String getText()      
-    { return "set start block size, L key";   }
-@Override public int[] getKeys() { return new int[] { KeyEvent.VK_L  }; }
+    { return "set end block size"; }  //, L key";   }
+@Override public int[] getKeys() { return null; }  // new int[] { KeyEvent.VK_L  }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     // ... under construction ...
@@ -959,8 +959,8 @@ class ComboNativeStep extends DescriptCombo
 {
 @Override public String[] getValues()  { return new String[] { "" }; }
 @Override public String getText()      
-    { return "set start block size, K key";   }
-@Override public int[] getKeys() { return new int[] { KeyEvent.VK_K  }; }
+    { return "set block size step"; }  //, K key";   }
+@Override public int[] getKeys() { return null; }  // new int[] { KeyEvent.VK_K  }; }
 @Override public void comboAction( RunInterface ri, int index ) 
     {
     // ... under construction ...
