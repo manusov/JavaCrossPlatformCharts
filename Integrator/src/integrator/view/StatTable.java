@@ -15,7 +15,6 @@ import integrator.controller.RunInterface;
 import integrator.model.Statistics;
 import integrator.view.DataTree.DataKeys;
 import java.awt.Dimension;
-import java.math.BigDecimal;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -32,9 +31,12 @@ public class StatTable
 private final int X = 250, Y = 130;
 private final JPanel panel;
 private final JTable table;
+private final DescriptTable model;
 private DataKeys dataKey;
-public JPanel getPanel() { return panel; }
-public void setDataKey( DataKeys x ) { dataKey = x; }
+
+public JPanel getPanel()             { return panel; }
+public AbstractTableModel getModel() { return model; }
+public void setDataKey( DataKeys x ) { dataKey = x;  }
 
 public StatTable()
     {
@@ -42,7 +44,7 @@ public StatTable()
     panel.setPreferredSize( new Dimension( X, Y ) );
     panel.setLayout( new BoxLayout( panel, BoxLayout.Y_AXIS ) );
     Box vertical = Box.createVerticalBox();
-    DescriptTable model = new ModelMath();   // TODO: make case for 4 modes
+    model = new ModelMath();   // TODO: make case for 4 modes
     table = new JTable( model );
     DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
     renderer.setHorizontalAlignment( JLabel.CENTER );

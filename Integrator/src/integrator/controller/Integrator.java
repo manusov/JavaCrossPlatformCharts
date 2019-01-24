@@ -3,6 +3,9 @@
 Debug benchmark integrator. Main class.
 
 ROADMAP.
+
+--- January 2019 ---
+
 1)+  Design packages and classes structure.
 2)+  Write class About.java.
 3)+  Write class Integrator.java.
@@ -23,19 +26,38 @@ ROADMAP.
      Prevent always and full redraw because time delays ?
      Listener for tooltip or improve draw window redrawability ?
 18)+ All supported widgets, by mouse. Include mark unsupported as gray.
+19)+  Log panel, for math. Design it place in the scenario.
+20)+  Table panel, for math. Design it place in the scenario.
 
-19)  Log panel, for math. Design it place in the scenario.
-20)  Table panel, for math. Design it place in the scenario.
+21)   Save text root menu item, design text file format, math mode.
+      Verify 0Dh, 0Ah, "\r\n" or "\n".
+22)   Save graphics root menu item.
 
-21)  Divider location and size make changeable.
-22)  GUI window resize bugs.
-23)  Draw bugs, yet set not resizable.
-24)  Use TAB-selected active widgets instead hotkeys.
+--- February 2019 ---
+
+1)   Math mode basics.
+2)   File mode basics.
+3)   JVM benchmark mode basics, required axis shift.
+4)   Native benchmark mode basics.
+
+---
+
+1)    Math mode precision issues, use BigDecimal if required.
+2)    Math mode infinity issues, use BigDecimal if required.
+3)    Redesign draw window, selectable base. "Redraw all" issues.
+
+---
+
+1)   Print and save graphics options.
+2)   Divider location and size make changeable.
+3)   GUI window resize bugs.
+4)   Draw bugs, yet set not resizable.
+5)   Use TAB-selected active widgets instead hotkeys.
      All supported widgets, by keyboard, resolve conflicts with default keys:
      cursor control, PgUp, PgDn, Home, End,
      remember many widgets, for example native mode, 
      don't use hotkeys for it, use TAB focus ?
-25)  Adaptive drawings instead find maximum size.
+6)   Adaptive drawings instead find maximum size (repeated item).
 
 */
 

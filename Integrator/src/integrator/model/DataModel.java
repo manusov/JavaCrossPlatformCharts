@@ -8,6 +8,7 @@ Contains implementation for statistics methods.
 package integrator.model;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Arrays;
 
 public class DataModel 
@@ -16,6 +17,7 @@ public class DataModel
 public Statistics calculateStatistics( double[][] f )
     {
     Statistics st = new Statistics();
+    MathContext mc = new MathContext( 3 );
     BigDecimal blank = new BigDecimal( 0.0 );
     st.xAverage = blank;
     st.xMedian = blank;
@@ -45,16 +47,16 @@ public Statistics calculateStatistics( double[][] f )
         {
 
         findMinMaxAverageMedian( f[0], f[0].length );
-        st.xMin = new BigDecimal( min );
-        st.xMax = new BigDecimal( max );
-        st.xAverage = new BigDecimal( average );
-        st.xMedian = new BigDecimal( median );
+        st.xMin = new BigDecimal( min, mc );
+        st.xMax = new BigDecimal( max, mc );
+        st.xAverage = new BigDecimal( average, mc );
+        st.xMedian = new BigDecimal( median, mc );
 
         findMinMaxAverageMedian( f[1], f[0].length );
-        st.yMin = new BigDecimal( min );
-        st.yMax = new BigDecimal( max );
-        st.yAverage = new BigDecimal( average );
-        st.yMedian = new BigDecimal( median );
+        st.yMin = new BigDecimal( min, mc );
+        st.yMax = new BigDecimal( max, mc );
+        st.yAverage = new BigDecimal( average, mc );
+        st.yMedian = new BigDecimal( median, mc );
         
         int n = f[0].length - 1;
         double[] g = new double[n];
@@ -79,10 +81,10 @@ public Statistics calculateStatistics( double[][] f )
             }
             
         findMinMaxAverageMedian( g, m );
-        st.dMin = new BigDecimal( min );
-        st.dMax = new BigDecimal( max );
-        st.dAverage = new BigDecimal( average );
-        st.dMedian = new BigDecimal( median );
+        st.dMin = new BigDecimal( min, mc );
+        st.dMax = new BigDecimal( max, mc );
+        st.dAverage = new BigDecimal( average, mc );
+        st.dMedian = new BigDecimal( median, mc );
         
         for( int i=0; i<m; i++ )
             {
@@ -90,10 +92,10 @@ public Statistics calculateStatistics( double[][] f )
             }
 
         findMinMaxAverageMedian( g, m );
-        st.mdMin = new BigDecimal( min );
-        st.mdMax = new BigDecimal( max );
-        st.mdAverage = new BigDecimal( average );
-        st.mdMedian = new BigDecimal( median );
+        st.mdMin = new BigDecimal( min, mc );
+        st.mdMax = new BigDecimal( max, mc );
+        st.mdAverage = new BigDecimal( average, mc );
+        st.mdMedian = new BigDecimal( median, mc );
         
         double[] h = new double[n];
         for( int i =0; i<n; i++ )
@@ -102,10 +104,10 @@ public Statistics calculateStatistics( double[][] f )
             }
         
         findMinMaxAverageMedian( h, n );
-        st.myMin = new BigDecimal( min );
-        st.myMax = new BigDecimal( max );
-        st.myAverage = new BigDecimal( average );
-        st.myMedian = new BigDecimal( median );
+        st.myMin = new BigDecimal( min, mc );
+        st.myMax = new BigDecimal( max, mc );
+        st.myAverage = new BigDecimal( average, mc );
+        st.myMedian = new BigDecimal( median, mc );
         
         }
     return st;    

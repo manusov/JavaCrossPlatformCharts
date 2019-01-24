@@ -19,26 +19,31 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.InputStream;
 import static java.lang.Thread.sleep;
 import java.net.URL;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.AbstractTableModel;
 
 public class RootMenu 
 {
 // child menus
 private final Object[][] itemsFile = {    
-    { "Report all", false,  // false means no checkbox at menu item
-      KeyEvent.VK_A, Event.CTRL_MASK, new ReportAllListener() }, 
-    { "Report this", false,
-      KeyEvent.VK_T, Event.CTRL_MASK, new ReportThisListener() },
+    { "Save text", false,  // false means no checkbox at menu item
+      KeyEvent.VK_T, Event.CTRL_MASK, new SaveTextListener() }, 
+    { "Save graphics", false,
+      KeyEvent.VK_G, Event.CTRL_MASK, new SaveGraphicsListener() },
     { null },
     { "Exit", false,
       KeyEvent.VK_Q, Event.CTRL_MASK, new ExitListener() } };
@@ -64,6 +69,65 @@ private final Object[][] rootItems = {
 // menu bar and it getter method
 private final JMenuBar menuBar;
 public JMenuBar getMenuBar() { return menuBar; }
+
+// class constructor
+public RootMenu()
+    {
+    // set items names strings and mnemonics
+    int n = rootItems.length;
+    JMenu[] menu = new JMenu[n];
+    for( int i=0; i<n; i++ )
+        {
+        menu[i] = new JMenu( (String) rootItems[i][0] );
+        menu[i].setMnemonic( (char) rootItems[i][1] );
+        }
+    // Set actions listeners for menu items
+    for( int i=0; i<n; i++ )  // this cycle for root (parent) menu items
+        {
+        Object[][] x = ( Object[][] ) rootItems[i][2];
+        int m = x.length;
+        for( int j=0; j<m; j++ )  // this cycle for child menus items
+            {
+            String s = ( String ) x[j][0];
+            if ( s == null )
+                {
+                menu[i].addSeparator();
+                }
+                else
+                {
+                JMenuItem item;
+                if ( ( boolean ) x[j][1] )
+                    {
+                    item = new JCheckBoxMenuItem( s );
+                    }
+                else
+                    {
+                    item = new JMenuItem( s );
+                    }
+                item.setAccelerator
+                    ( KeyStroke.getKeyStroke( (int) x[j][2], (int) x[j][3] ) );
+                item.addActionListener( (ActionListener) x[j][4] );
+                menu[i].add(item);
+                }
+            }
+        }
+    // Create and return menu bar, caller can connect it to frame
+    menuBar = new JMenuBar();
+    for( int i=0; i<n; i++ )
+        {
+        menuBar.add( menu[i] );
+        }
+    // Add listener for update checkboxes
+    menu[1].addMenuListener( new ChildsMenuListener() );
+    // Blank child processes data
+    blankAllChilds();
+    
+    // THIS BECAUSE UNDER CONSTRUCTION
+    // menu[0].getItem(0).setEnabled( false );
+    menu[0].getItem(1).setEnabled( false );
+    // THIS BECAUSE UNDER CONSTRUCTION
+    
+    }
 
 // child processes control data
 private final int childCount = 5;
@@ -175,66 +239,213 @@ public void stopAllChilds()
         }
     }
 
-// class constructor
-public RootMenu()
+// data and helper methods for save text and graphics data
+private JFileChooser chooser;
+private FileNameExtensionFilter filter;
+private final String DEFAULT_FILE_NAME = "report.txt";
+
+// root menu handler = save text report to file
+private class SaveTextListener implements ActionListener
+{
+@Override public void actionPerformed( ActionEvent event ) 
     {
-    // set items names strings and mnemonics
-    int n = rootItems.length;
-    JMenu[] menu = new JMenu[n];
-    for( int i=0; i<n; i++ )
+    // get window context
+    JFrame parentWin = Integrator.getApplication().getFrame();
+    About aboutWin   = Integrator.getAbout();
+    String logText   = Integrator.getTextLog().getText().getText();
+    AbstractTableModel statTable = Integrator.getStatTable().getModel();
+    // initializing file operations context
+    chooser = new JFileChooser();
+    chooser.setDialogTitle( "Report - select directory" );
+    filter = new FileNameExtensionFilter ( "Text files" , "txt" );
+    chooser.setFileFilter( filter );
+    chooser.setFileSelectionMode( JFileChooser.FILES_ONLY );
+    chooser.setSelectedFile( new File( DEFAULT_FILE_NAME ) );
+    // (re)start dialogue
+    boolean inDialogue = true;
+    while( inDialogue )
         {
-        menu[i] = new JMenu( (String) rootItems[i][0] );
-        menu[i].setMnemonic( (char) rootItems[i][1] );
-        }
-    // Set actions listeners for menu items
-    for( int i=0; i<n; i++ )  // this cycle for root (parent) menu items
-        {
-        Object[][] x = ( Object[][] ) rootItems[i][2];
-        int m = x.length;
-        for( int j=0; j<m; j++ )  // this cycle for child menus items
+        int select = chooser.showSaveDialog( parentWin );
+        // save file
+        if( select==JFileChooser.APPROVE_OPTION )
             {
-            String s = ( String ) x[j][0];
-            if ( s == null )
+            String filePath = chooser.getSelectedFile().getPath();
+            int x0 = JOptionPane.YES_OPTION;
+            // check file exist and warning message
+            File file = new File( filePath );
+            if( file.exists() == true )
                 {
-                menu[i].addSeparator();
+                x0 = JOptionPane.showConfirmDialog
+                    ( null, 
+                    "File exist: " + filePath + "\noverwrite?" , "REPORT" ,
+                    JOptionPane.YES_NO_CANCEL_OPTION ,
+                    JOptionPane.WARNING_MESSAGE );  // or QUESTION_MESSAGE
                 }
-                else
+            // Select operation by user selection
+            if ( ( x0 == JOptionPane.NO_OPTION  ) |
+                 ( x0 == JOptionPane.CLOSED_OPTION ) )
+                { 
+                continue; 
+                }
+            if ( x0 == JOptionPane.CANCEL_OPTION ) 
+                { 
+                inDialogue = false;
+                continue; 
+                }
+            // continue prepare for save file.
+            StringBuilder data = new StringBuilder ( "" );
+            // add product and copyright information to report
+            data.append( aboutWin.getLongName() );
+            data.append( "\r\n" );
+            data.append( aboutWin.getWebSite() );
+            data.append( "\r\n" );
+            data.append( "report file." );
+            data.append( "\r\n\r\n" );
+            // add text log information to report
+            if ( logText != null )
                 {
-                JMenuItem item;
-                if ( ( boolean ) x[j][1] )
+                int n = logText.length();
+                boolean b = false;
+                for( int i=0; i<n; i++ )
                     {
-                    item = new JCheckBoxMenuItem( s );
+                    // sequences 0Ah/0Dh, 0Dh/0Ah, 0Dh, 0Ah
+                    // must be replaced to sequence 0Dh/0Ah
+                    char c = logText.charAt( i );
+                    if ( ( c == '\r' ) || ( c == '\n' ) )
+                        {
+                        if ( b )
+                            {
+                            b = false;
+                            }
+                        else
+                            {
+                            data.append( "\r\n" );
+                            b = true;
+                            }
+                        }
+                    else
+                        {
+                        data.append( c );
+                        b = false;
+                        }
                     }
-                else
-                    {
-                    item = new JMenuItem( s );
-                    }
-                item.setAccelerator
-                    ( KeyStroke.getKeyStroke( (int) x[j][2], (int) x[j][3] ) );
-                item.addActionListener( (ActionListener) x[j][4] );
-                menu[i].add(item);
                 }
+            // add statistics table information to report
+            if ( statTable != null )
+                {
+                int columns = statTable.getColumnCount();
+                int rows = statTable.getRowCount();
+                int colSize;
+                int[] maxColSizes = new int[columns];
+                int maxColSize = 13;
+                // Get column names lengths
+                for ( int i=0; i<columns; i++ )
+                    {
+                    maxColSizes[i] = statTable.getColumnName(i).length(); 
+                    }
+                // Get column maximum lengths
+                for ( int j=0; j<rows; j++ )
+                    {
+                    for ( int i=0; i<columns; i++ )
+                        {
+                        colSize = 
+                            (( String )( statTable.getValueAt( j, i ) )).
+                            length();
+                        if ( colSize > maxColSizes[i] )
+                            {
+                            maxColSizes[i] = colSize; 
+                            }
+                        }
+                    }
+                for ( int i=0; i<maxColSizes.length; i++ ) 
+                    {
+                    maxColSize += maxColSizes[i];
+                    }
+                // Write table up
+                data.append( "\r\n\r\n" );
+                for ( int i=0; i<columns; i++ )
+                    {
+                    data.append( " " );
+                    data.append( statTable.getColumnName( i ) );
+                    colSize = 
+                        maxColSizes[i] - 
+                        statTable.getColumnName( i ).length() + 1;
+                    for ( int k=0; k<colSize; k++ )
+                        {
+                        data.append( " " );
+                        }
+                    }
+                // Write horizontal line
+                data.append("\r\n" );
+                for ( int i=0; i<maxColSize; i++ )
+                    {
+                    data.append( "-" );
+                    }
+                data.append("\r\n" );
+
+            // Write table content
+            for (int j=0; j<rows; j++)         // this cycle for rows
+                {
+                for (int i=0; i<columns; i++)  // this cycle for columns
+                    {
+                    data.append( statTable.getValueAt( j, i ) );
+                    colSize = maxColSizes[i] - 
+                        ((String)statTable.getValueAt(j,i)).length() + 2;
+                    for ( int k=0; k<colSize; k++ )
+                        {
+                        data.append( " " );
+                        }
+                    }
+                    data.append( "\r\n" );
+                }
+                // Write horizontal line
+                for ( int i=0; i<maxColSize; i++ )
+                    {
+                    data.append( "-" );
+                    }
+                data.append( "\r\n" );
+                }
+            // add drawings settings information to report
+            
+            // add function Y=F(X) data to report
+            
+            // save report
+            String fileData = data.toString();
+            int status = 0;
+            try ( FileWriter writer = new FileWriter( filePath, false ) )
+                {
+                writer.write( fileData );
+                writer.flush(); 
+                }
+            catch( Exception ex )
+                {
+                status = 1; 
+                }
+            // message box after report saved
+            if ( status == 0 )  
+                {
+                JOptionPane.showMessageDialog
+                ( parentWin, "Report saved: " + filePath, "REPORT",
+                JOptionPane.WARNING_MESSAGE ); 
+                }
+            else
+                {
+                JOptionPane.showMessageDialog
+                ( parentWin, "Write report failed", "ERROR",
+                JOptionPane.ERROR_MESSAGE ); 
+                }
+            inDialogue = false;
+            }  
+        else
+            { 
+            inDialogue = false; 
             }
-        }
-    // Create and return menu bar, caller can connect it to frame
-    menuBar = new JMenuBar();
-    for( int i=0; i<n; i++ )
-        {
-        menuBar.add( menu[i] );
-        }
-    // Add listener for update checkboxes
-    menu[1].addMenuListener( new ChildsMenuListener() );
-    // Blank child processes data
-    blankAllChilds();
-    
-    // THIS BECAUSE UNDER CONSTRUCTION
-    menu[0].getItem(0).setEnabled( false );
-    menu[0].getItem(1).setEnabled( false );
-    // THIS BECAUSE UNDER CONSTRUCTION
-    
+        }    // End of save dialogue cycle
     }
+}
 
-private class ReportAllListener implements ActionListener
+// root menu handler = save graphics image to file
+private class SaveGraphicsListener implements ActionListener
 {
 @Override public void actionPerformed( ActionEvent event ) 
     {  
@@ -242,14 +453,8 @@ private class ReportAllListener implements ActionListener
     }
 }
 
-private class ReportThisListener implements ActionListener
-{
-@Override public void actionPerformed( ActionEvent event ) 
-    {  
-    
-    }
-}
-
+// root menu handler = exit application, 
+// note required check and terminate child processes
 private class ExitListener implements ActionListener
     {
     @Override public void actionPerformed( ActionEvent event ) 

@@ -350,7 +350,6 @@ private double[][] calculate
     double x2 = bd2.doubleValue();
     double dx = bd3.doubleValue();
     double m = ( x2 - x1 ) / dx;
-    // int n = (int)m;                // n = number of tabulation steps
     int n = (int)m + 1;               // n = number of tabulation steps
     array = f.function(x1, dx, n);    // call target method and return
     return array;

@@ -27,8 +27,10 @@ private final int X = 400, Y = 130;
 private final JPanel panel;
 private final JTextArea text;
 private DataKeys dataKey;
-public JPanel getPanel() { return panel; }
-public void setDataKey( DataKeys x ) { dataKey = x; }
+
+public JPanel getPanel()             { return panel; }
+public JTextArea getText()           { return text;  }
+public void setDataKey( DataKeys x ) { dataKey = x;  }
 
 public TextLog()
     {
