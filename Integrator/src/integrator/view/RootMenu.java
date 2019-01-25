@@ -12,17 +12,21 @@ Class for up-string root menu.
 package integrator.view;
 
 import integrator.controller.Integrator;
+import integrator.controller.RunInterface;
 import java.awt.Component;
 import java.awt.Event;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
 import static java.lang.Thread.sleep;
 import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -30,6 +34,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
@@ -124,7 +129,7 @@ public RootMenu()
     
     // THIS BECAUSE UNDER CONSTRUCTION
     // menu[0].getItem(0).setEnabled( false );
-    menu[0].getItem(1).setEnabled( false );
+    // menu[0].getItem(1).setEnabled( false );
     // THIS BECAUSE UNDER CONSTRUCTION
     
     }
@@ -239,11 +244,6 @@ public void stopAllChilds()
         }
     }
 
-// data and helper methods for save text and graphics data
-private JFileChooser chooser;
-private FileNameExtensionFilter filter;
-private final String DEFAULT_FILE_NAME = "report.txt";
-
 // root menu handler = save text report to file
 private class SaveTextListener implements ActionListener
 {
@@ -254,10 +254,13 @@ private class SaveTextListener implements ActionListener
     About aboutWin   = Integrator.getAbout();
     String logText   = Integrator.getTextLog().getText().getText();
     AbstractTableModel statTable = Integrator.getStatTable().getModel();
+    RunInterface ri = Integrator.getRunInterface();
     // initializing file operations context
-    chooser = new JFileChooser();
+    final String DEFAULT_FILE_NAME = "report.txt";
+    JFileChooser chooser = new JFileChooser();
     chooser.setDialogTitle( "Report - select directory" );
-    filter = new FileNameExtensionFilter ( "Text files" , "txt" );
+    FileNameExtensionFilter filter = 
+        new FileNameExtensionFilter ( "Text files" , "txt" );
     chooser.setFileFilter( filter );
     chooser.setFileSelectionMode( JFileChooser.FILES_ONLY );
     chooser.setSelectedFile( new File( DEFAULT_FILE_NAME ) );
@@ -267,27 +270,27 @@ private class SaveTextListener implements ActionListener
         {
         int select = chooser.showSaveDialog( parentWin );
         // save file
-        if( select==JFileChooser.APPROVE_OPTION )
+        if( select == JFileChooser.APPROVE_OPTION )
             {
             String filePath = chooser.getSelectedFile().getPath();
-            int x0 = JOptionPane.YES_OPTION;
+            int option = JOptionPane.YES_OPTION;
             // check file exist and warning message
             File file = new File( filePath );
             if( file.exists() == true )
                 {
-                x0 = JOptionPane.showConfirmDialog
+                option = JOptionPane.showConfirmDialog
                     ( null, 
                     "File exist: " + filePath + "\noverwrite?" , "REPORT" ,
                     JOptionPane.YES_NO_CANCEL_OPTION ,
                     JOptionPane.WARNING_MESSAGE );  // or QUESTION_MESSAGE
                 }
             // Select operation by user selection
-            if ( ( x0 == JOptionPane.NO_OPTION  ) |
-                 ( x0 == JOptionPane.CLOSED_OPTION ) )
+            if ( ( option == JOptionPane.NO_OPTION  ) |
+                 ( option == JOptionPane.CLOSED_OPTION ) )
                 { 
                 continue; 
                 }
-            if ( x0 == JOptionPane.CANCEL_OPTION ) 
+            if ( option == JOptionPane.CANCEL_OPTION ) 
                 { 
                 inDialogue = false;
                 continue; 
@@ -403,13 +406,37 @@ private class SaveTextListener implements ActionListener
                     {
                     data.append( "-" );
                     }
+                data.append( "\r\n\r\n" );
+                }
+            // add drawings settings information to report, UNDER CONSTRUCTION,
+            // settings required or not when statistics table present ?
+            // add function Y=F(X) data to report
+            double[][] fnArray = ri.getFunctionArray();
+            if ( ( fnArray != null )       && ( fnArray.length == 2 ) &&
+                 ( fnArray[0] != null )    && ( fnArray[1] != null )  &&
+                 ( fnArray[0].length > 0 ) &&
+                 ( fnArray[0].length == fnArray[1].length ) )
+                {
+                int fnCount = fnArray[0].length;
+                int fnColSize = 30;
+                data.append( " X            Y\r\n" );
+                for( int i=0; i<fnColSize; i++ )
+                    {
+                    data.append( "-" );
+                    }
+                data.append( "\r\n" );
+                for( int i=0; i<fnCount; i++ )
+                    {
+                    data.append( String.format( " %10.7f   %10.7f\r\n", 
+                                 fnArray[0][i], fnArray[1][i] ) );
+                    }
+                for( int i=0; i<fnColSize; i++ )
+                    {
+                    data.append( "-" );
+                    }
                 data.append( "\r\n" );
                 }
-            // add drawings settings information to report
-            
-            // add function Y=F(X) data to report
-            
-            // save report
+            // save text report
             String fileData = data.toString();
             int status = 0;
             try ( FileWriter writer = new FileWriter( filePath, false ) )
@@ -449,7 +476,89 @@ private class SaveGraphicsListener implements ActionListener
 {
 @Override public void actionPerformed( ActionEvent event ) 
     {  
-    
+    // get window context
+    JFrame parentWin = Integrator.getApplication().getFrame();
+    JPanel displayWin = Integrator.getDisplay().getPanel();
+    // initializing file operations context
+    final String DEFAULT_FILE_NAME = "picture.png";
+    JFileChooser chooser = new JFileChooser();
+    chooser.setDialogTitle( "Pictire - select directory" );
+    FileNameExtensionFilter filter = 
+        new FileNameExtensionFilter ( "Picture files" , "png" );
+    chooser.setFileFilter( filter );
+    chooser.setFileSelectionMode( JFileChooser.FILES_ONLY );
+    chooser.setSelectedFile( new File( DEFAULT_FILE_NAME ) );
+    // (re)start dialogue
+    boolean inDialogue = true;
+    while( inDialogue )
+        {
+        int select = chooser.showSaveDialog( parentWin );
+        // save file
+        if( select == JFileChooser.APPROVE_OPTION )
+            {
+            String filePath = chooser.getSelectedFile().getPath();
+            int option = JOptionPane.YES_OPTION;
+            // check file exist and warning message
+            File file = new File( filePath );
+            if( file.exists() == true )
+                {
+                option = JOptionPane.showConfirmDialog
+                    ( null, 
+                    "File exist: " + filePath + "\noverwrite?" , "IMAGE" ,
+                    JOptionPane.YES_NO_CANCEL_OPTION ,
+                    JOptionPane.WARNING_MESSAGE );  // or QUESTION_MESSAGE
+                }
+            // Select operation by user selection
+            if ( ( option == JOptionPane.NO_OPTION  ) |
+                 ( option == JOptionPane.CLOSED_OPTION ) )
+                { 
+                continue; 
+                }
+            if ( option == JOptionPane.CANCEL_OPTION ) 
+                { 
+                inDialogue = false;
+                continue; 
+                }
+            // generate graphics image from drawings GUI panel
+            int w = displayWin.getWidth();
+            int h = displayWin.getHeight();
+            BufferedImage image = 
+                new BufferedImage( w, h, BufferedImage.TYPE_INT_RGB );
+            Graphics2D g = image.createGraphics();
+            g.setClip( 0, 0, w, h );
+            displayWin.paint( g );
+            g.drawImage( image, w, h, displayWin );
+            g.dispose();
+            // save graphics image to file
+            int status = 0;
+            try
+                {
+                ImageIO.write( image, "png", new File( filePath ) );
+                }
+            catch( Exception ex )
+                {
+                status = 1; 
+                }
+            // message box after report saved
+            if ( status == 0 )  
+                {
+                JOptionPane.showMessageDialog
+                ( parentWin, "Image saved: " + filePath, "IMAGE",
+                JOptionPane.WARNING_MESSAGE ); 
+                }
+            else
+                {
+                JOptionPane.showMessageDialog
+                ( parentWin, "Write image failed", "ERROR",
+                JOptionPane.ERROR_MESSAGE ); 
+                }
+            inDialogue = false;
+            }  
+        else
+            { 
+            inDialogue = false; 
+            }
+        }   // End of save dialogue cycle
     }
 }
 

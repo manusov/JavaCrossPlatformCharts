@@ -29,7 +29,7 @@ ROADMAP.
 19)+  Log panel, for math. Design it place in the scenario.
 20)+  Table panel, for math. Design it place in the scenario.
 
-21)   Save text root menu item, design text file format, math mode.
+21)   Save text root menu item, design text file format, math mode edition.
       Verify 0Dh, 0Ah, "\r\n" or "\n".
 22)   Save graphics root menu item.
 
