@@ -11,9 +11,16 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Arrays;
 
-public class DataModel 
+public abstract class DataModel 
 {
 
+// get unified defaults for all functions
+abstract public FunctionDefaults getUnifiedDefaults();
+
+// get per-function defaults and values
+abstract public Function[] getFunctionsList();
+
+// statistic helper for function Y=F(X)
 public Statistics calculateStatistics( double[][] f )
     {
     Statistics st = new Statistics();

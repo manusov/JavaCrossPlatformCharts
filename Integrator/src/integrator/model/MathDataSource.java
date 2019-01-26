@@ -6,51 +6,139 @@ Data model class for scenario: draw mathematics function Y=F(X).
 
 package integrator.model;
 
+import integrator.controller.RunInterface.Gcolor;
 import java.math.BigDecimal;
 
 public class MathDataSource extends DataModel
 {
-
-public Function[] getFunctionsList() { return FUNCTIONS_LIST; }    
-
+// get unified defaults, for all functions
+@Override public FunctionDefaults getUnifiedDefaults()
+    {
+    return new UnifiedDefaults(); 
+    }
+// get list of supported functions
+@Override public Function[] getFunctionsList()
+    {
+    return FUNCTIONS_LIST; 
+    }
 // list of supported functions
 private final Function[] FUNCTIONS_LIST =
+    {
+    new X()         ,
+    new XPM1()      ,
+    new XP2()       ,
+    new XP3()       ,
+    new SQRTX()     ,
+    new EXPX()      ,
+    new XP10()      ,
+    new LNX()       ,
+    new LGX()       ,
+    new SINX()      ,
+    new COSX()      ,
+    new TGX()       ,
+    new CTGX()      ,
+    new SECX()      ,
+    new COSECX()    ,
+    new SHX()       ,
+    new CHX()       ,
+    new THX()       ,
+    new CTHX()      ,
+    new SECHX()     ,
+    new COSECHX()   ,
+    new ARCSINX()   ,
+    new ARCCOSX()   ,
+    new ARCTGX()    ,
+    new ARCCTGX()   ,
+    new ARCSECX()   ,
+    new ARCCOSECX() ,
+    new ARSHX()     ,
+    new ARCHX()     ,
+    new ARTHX()     ,
+    new ARCTHX()    ,
+    new ARSCHX()    ,
+    new ARCSCHX()   ,
+    new RAND()      ,
+    };
+}
+
+// unified defaults, for all functions,
+// this data can be customized by per-function data in the controller logic.
+
+class UnifiedDefaults extends FunctionDefaults
+{
+@Override public BigDecimal getDefaultXmin()
+    { return new BigDecimal("-1.0");  }
+@Override public BigDecimal getDefaultXmax() 
+    { return new BigDecimal("1.0");   }
+@Override public BigDecimal getDefaultYmin() 
+    { return new BigDecimal("-1.0");  }
+@Override public BigDecimal getDefaultYmax() 
+    { return new BigDecimal("1.0");   }
+@Override public BigDecimal getDefaultXstepSmall()  
+    { return new BigDecimal("0.02");  }
+@Override public BigDecimal getDefaultXstepBig()    
+    { return new BigDecimal("0.1");   }
+@Override public BigDecimal getDefaultYstepSmall()  
+    { return new BigDecimal("0.02");  }
+@Override public BigDecimal getDefaultYstepBig()    
+    { return new BigDecimal("0.1");   }
+@Override public BigDecimal getDefaultTabStep()     
+    { return new BigDecimal("0.001"); }
+
+@Override public String getDefaultNameX()
+    { return "X"; }
+@Override public String getDefaultNameY()           
+    { return "Y"; }
+@Override public Gcolor getDefaultColor()    
+    { return Gcolor.BACKGROUND_WHITE; }
+
+@Override public BigDecimal[] getDefaultTabSteps()
+    {
+    return new BigDecimal[]
         {
-        new X()         ,
-        new XPM1()      ,
-        new XP2()       ,
-        new XP3()       ,
-        new SQRTX()     ,
-        new EXPX()      ,
-        new XP10()      ,
-        new LNX()       ,
-        new LGX()       ,
-        new SINX()      ,
-        new COSX()      ,
-        new TGX()       ,
-        new CTGX()      ,
-        new SECX()      ,
-        new COSECX()    ,
-        new SHX()       ,
-        new CHX()       ,
-        new THX()       ,
-        new CTHX()      ,
-        new SECHX()     ,
-        new COSECHX()   ,
-        new ARCSINX()   ,
-        new ARCCOSX()   ,
-        new ARCTGX()    ,
-        new ARCCTGX()   ,
-        new ARCSECX()   ,
-        new ARCCOSECX() ,
-        new ARSHX()     ,
-        new ARCHX()     ,
-        new ARTHX()     ,
-        new ARCTHX()    ,
-        new ARSCHX()    ,
-        new ARCSCHX()   ,
-        new RAND()      ,
+        new BigDecimal("100.0") ,
+        new BigDecimal("10.0")  ,
+        new BigDecimal("1.0")   ,
+        new BigDecimal("0.1")   ,
+        new BigDecimal("0.05")
         };
+    }
+
+@Override public int getDefaultTabStepsCount()   
+    { return getDefaultTabSteps().length; }
+@Override public int getDefaultTabStepsDefault() 
+    { return 2; }
+
+@Override public BigDecimal[] getDefaultXrange()
+    {
+    return new BigDecimal[]
+        {
+        new BigDecimal("0.5")   ,
+        new BigDecimal("1.0")   ,
+        new BigDecimal("2.0")  ,
+        };
+    }
+
+@Override public int getDefaultXrangeCount()    
+    { return getDefaultXrange().length; }
+@Override public int getDefaultXrangeDefault()  
+    { return 1; }
+
+@Override public BigDecimal[] getDefaultYrange()
+    {
+    return new BigDecimal[]
+        {
+        new BigDecimal("0.5")   ,
+        new BigDecimal("1.0")   ,
+        new BigDecimal("2.0")  ,
+        };
+    }
+
+@Override public int getDefaultYrangeCount()   
+    { return getDefaultYrange().length; }
+@Override public int getDefaultYrangeDefault() 
+    { return 1; }
+    
 }
 
 // Functions descriptions as internal classes, peer extends possible,

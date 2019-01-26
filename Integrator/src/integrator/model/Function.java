@@ -1,7 +1,8 @@
 /*
 
 Abstract class for mathematics function Y=F(X) description template.
-Get calculated function results and function visualization optimal conditions.
+Get calculated function results and per-function 
+visualization optimal and current conditions.
 
 */
 

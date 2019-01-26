@@ -19,18 +19,18 @@ import java.math.BigDecimal;
 public interface RunInterface 
 {
 
+// options data definitions
+public enum Controls { X_AXIS_UP   , X_AXIS_DOWN , Y_AXIS_LEFT , Y_AXIS_RIGHT , 
+                       X_SCALE_INC , X_SCALE_DEC , Y_SCALE_INC , Y_SCALE_DEC  ,
+                       TAB_INC , TAB_DEC , RESET , RUN , LOAD };
+public enum Gcolor   { BACKGROUND_WHITE, BACKGROUND_BLACK };
+
 // functions get
 public Function[] getFunctionsList();
 public Function   getFunction( int i );
 public Function   getSelectedFunction();
 public double[][] getFunctionArray();
 public Statistics calculateStatistics();
-
-// options data definitions
-public enum Controls { X_AXIS_UP   , X_AXIS_DOWN , Y_AXIS_LEFT , Y_AXIS_RIGHT , 
-                       X_SCALE_INC , X_SCALE_DEC , Y_SCALE_INC , Y_SCALE_DEC  ,
-                       TAB_INC , TAB_DEC , RESET , RUN , LOAD };
-public enum Gcolor   { BACKGROUND_WHITE, BACKGROUND_BLACK };
 
 // adjust view options
 public void sendFunction( int i );
