@@ -26,7 +26,7 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 public class About 
 {
-private final String VERSION_NAME = "v0.00.21";
+private final String VERSION_NAME = "v0.00.22";
 private final String VENDOR_NAME  = "(C)2019 IC Book Labs";
 private final String SHORT_NAME   = "Integrator " + VERSION_NAME;
 private final String LONG_NAME    = "Benchmarks " + SHORT_NAME;

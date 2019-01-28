@@ -26,18 +26,31 @@ ROADMAP.
      Prevent always and full redraw because time delays ?
      Listener for tooltip or improve draw window redrawability ?
 18)+ All supported widgets, by mouse. Include mark unsupported as gray.
-19)+  Log panel, for math. Design it place in the scenario.
-20)+  Table panel, for math. Design it place in the scenario.
-21)+  Save text root menu item, design text file format, math mode edition.
-      Verify 0Dh, 0Ah, "\r\n" or "\n".
-22)+  Save graphics root menu item.
+19)+ Log panel, for math. Design it place in the scenario.
+20)+ Table panel, for math. Design it place in the scenario.
+21)+ Save text root menu item, design text file format, math mode edition.
+     Verify 0Dh, 0Ah, "\r\n" or "\n".
+22)+ Save graphics root menu item.
+
+--- January 2019 ---
+
+1)+  Math mode basics.
 
 --- February 2019 ---
 
-1)   Math mode basics.
 2)   File mode basics.
+     RunSettings.java, lines 121, 270 to temporary lock file options,
+     RunSettings.java, line 827 is current work.
+     FileDataSource.java, line 62.
+     Assign key for file data interpretion.
+     X, F(X), Array X[i], Y[i].
+     Handling for NaN.
+     Required adaptive mode, FileDataSource.java line 75. Or save-load include statistics.
+
 3)   JVM benchmark mode basics, required axis shift.
 4)   Native benchmark mode basics.
+5)   Re-design draw display window, axis shifts buttons.
+6)   Re-design draw display window, Xmin, Xmax, Ymin, Ymax fields.
 
 ---
 

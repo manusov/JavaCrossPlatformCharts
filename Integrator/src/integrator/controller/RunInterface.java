@@ -32,6 +32,10 @@ public Function   getSelectedFunction();
 public double[][] getFunctionArray();
 public Statistics calculateStatistics();
 
+// functions set, usage example: set Y = F(X) data from loaded file
+public void loadFunction
+    ( int index, String xname, String yname, double[][] data );
+
 // adjust view options
 public void sendFunction( int i );
 public void sendControl( Controls control );

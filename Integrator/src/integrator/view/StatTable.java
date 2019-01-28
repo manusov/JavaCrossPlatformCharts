@@ -94,7 +94,7 @@ private class StatTablePanel extends LogPanel
         RunInterface ri = Integrator.getRunInterface();
         if ( ri != null )
             {
-             // row=5, column=1, step
+            // row=5, column=1, step
             table.setValueAt( ri.getTabStep().toPlainString(), 5, 1 );
             // other data from statistics entry
             Statistics st = ri.calculateStatistics();

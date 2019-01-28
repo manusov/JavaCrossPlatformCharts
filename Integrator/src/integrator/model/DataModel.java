@@ -7,6 +7,7 @@ Contains implementation for statistics methods.
 
 package integrator.model;
 
+import integrator.controller.RunInterface;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Arrays;
@@ -14,11 +15,101 @@ import java.util.Arrays;
 public abstract class DataModel 
 {
 
-// get unified defaults for all functions
-abstract public FunctionDefaults getUnifiedDefaults();
-
 // get per-function defaults and values
 abstract public Function[] getFunctionsList();
+
+// load function data, optional supported, example = load data from file
+// parent class provides dummy handler for this function
+public void loadFunction
+    ( int index, String xname, String yname, double[][] data )
+    {
+    // parent class provides dummy handler 
+    }
+
+// unified defaults, for all functions,
+// this data can be customized by per-function data in the controller logic.
+class UnifiedDefaults extends FunctionDefaults
+{
+@Override public BigDecimal getDefaultXmin()
+    { return new BigDecimal("-1.0");  }
+@Override public BigDecimal getDefaultXmax() 
+    { return new BigDecimal("1.0");   }
+@Override public BigDecimal getDefaultYmin() 
+    { return new BigDecimal("-1.0");  }
+@Override public BigDecimal getDefaultYmax() 
+    { return new BigDecimal("1.0");   }
+@Override public BigDecimal getDefaultXstepSmall()  
+    { return new BigDecimal("0.02");  }
+@Override public BigDecimal getDefaultXstepBig()    
+    { return new BigDecimal("0.1");   }
+@Override public BigDecimal getDefaultYstepSmall()  
+    { return new BigDecimal("0.02");  }
+@Override public BigDecimal getDefaultYstepBig()    
+    { return new BigDecimal("0.1");   }
+@Override public BigDecimal getDefaultTabStep()     
+    { return new BigDecimal("0.001"); }
+
+@Override public String getDefaultNameX()
+    { return "X"; }
+@Override public String getDefaultNameY()           
+    { return "Y"; }
+@Override public RunInterface.Gcolor getDefaultColor()    
+    { return RunInterface.Gcolor.BACKGROUND_WHITE; }
+
+@Override public BigDecimal[] getDefaultTabSteps()
+    {
+    return new BigDecimal[]
+        {
+        new BigDecimal("100.0") ,
+        new BigDecimal("10.0")  ,
+        new BigDecimal("1.0")   ,
+        new BigDecimal("0.1")   ,
+        new BigDecimal("0.05")
+        };
+    }
+
+@Override public int getDefaultTabStepsCount()   
+    { return getDefaultTabSteps().length; }
+@Override public int getDefaultTabStepsDefault() 
+    { return 2; }
+
+@Override public BigDecimal[] getDefaultXrange()
+    {
+    return new BigDecimal[]
+        {
+        new BigDecimal("0.5")   ,
+        new BigDecimal("1.0")   ,
+        new BigDecimal("2.0")  ,
+        };
+    }
+
+@Override public int getDefaultXrangeCount()    
+    { return getDefaultXrange().length; }
+@Override public int getDefaultXrangeDefault()  
+    { return 1; }
+
+@Override public BigDecimal[] getDefaultYrange()
+    {
+    return new BigDecimal[]
+        {
+        new BigDecimal("0.5")   ,
+        new BigDecimal("1.0")   ,
+        new BigDecimal("2.0")  ,
+        };
+    }
+
+@Override public int getDefaultYrangeCount()   
+    { return getDefaultYrange().length; }
+@Override public int getDefaultYrangeDefault() 
+    { return 1; }
+    
+}
+
+// get unified defaults for all functions
+public FunctionDefaults getUnifiedDefaults()
+    {
+    return new UnifiedDefaults(); 
+    }
 
 // statistic helper for function Y=F(X)
 public Statistics calculateStatistics( double[][] f )

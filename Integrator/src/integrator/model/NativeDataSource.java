@@ -8,6 +8,5 @@ package integrator.model;
 
 public class NativeDataSource extends DataModel
 {
-@Override public FunctionDefaults getUnifiedDefaults() { return null; }
-@Override public Function[] getFunctionsList()         { return null; }
+@Override public Function[] getFunctionsList()  { return null; }
 }

@@ -19,15 +19,27 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 // import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class RunSettings
 {
@@ -118,7 +130,7 @@ class RunSettingsPanelMath extends OptionPanel
     // layout for buttons
     layoutSingleSmall( s, panel, b[0], 55 );
     // THIS BECAUSE UNDER CONSTRUCTION
-    b[0].setEnabled( false );
+    // b[0].setEnabled( false );
     // THIS BECAUSE UNDER CONSTRUCTION
     }
 private static void layoutSingleBig
@@ -210,6 +222,53 @@ private static void layoutSingleSmall
     {
     return ( ActionEvent e ) -> 
         {
+        // command = button ID as string
+        String command = e.getActionCommand();
+        // selector = button ID as integer number, converted from string
+        int selector;
+        if ( ( command != null ) && ( command.length() >= 1 ) )
+            {
+            try {
+                selector = Integer.decode(command);
+                }
+            catch (Exception ex)  // if error when convert string to number
+                {
+                selector = -1;  // force wrong button ID if error
+                }
+            if ( (selector >= 0) & selector < getButtonsList().length ) 
+                {
+                // execute operation, associated with this button press
+                RunInterface ri = Integrator.getRunInterface();
+                getButtonsList()[selector].buttonAction( ri );
+                // set buttons enabled or disabled by this action result
+                dataChanged();
+                // refresh GUI = f ( action results )
+                // refresh function Y=F(X) draw window
+                JPanel p = Integrator.getDisplay().getPanel();
+                p.repaint();
+                // refresh view settings buttons state: gray or active
+                p = Integrator.getViewSettings().getPanel();
+                if ( p instanceof OptionPanel )
+                    {
+                    ( (OptionPanel)p ).dataChanged();
+                    p.repaint();
+                    }
+                // refresh text log, center down left window
+                p = Integrator.getTextLog().getPanel();
+                if ( p instanceof LogPanel )
+                    {
+                    ( (LogPanel)p ).dataChanged();
+                    p.repaint();
+                    }
+                // refresh statistics table, center down right window
+                p = Integrator.getStatTable().getPanel();
+                if ( p instanceof LogPanel )
+                    {
+                    ( (LogPanel)p ).dataChanged();
+                    p.repaint();
+                    }
+                }
+            }
         };
     }
 }
@@ -241,8 +300,8 @@ class RunSettingsPanelFile extends OptionPanel
     layoutSingleSmall( s, panel, b[0],  3 );
     layoutSingleSmall( s, panel, b[1], 33 );
     // BECAUSE UNDER CONSTRUCTION
-    b[0].setEnabled(false);
-    b[1].setEnabled(false);
+    // b[0].setEnabled(false);
+    // b[1].setEnabled(false);
     // BECAUSE UNDER CONSTRUCTION
     }
 private static void layoutSingleSmall
@@ -267,6 +326,53 @@ private static void layoutSingleSmall
     {
     return ( ActionEvent e ) -> 
         {
+        // command = button ID as string
+        String command = e.getActionCommand();
+        // selector = button ID as integer number, converted from string
+        int selector;
+        if ( ( command != null ) && ( command.length() >= 1 ) )
+            {
+            try {
+                selector = Integer.decode(command);
+                }
+            catch (Exception ex)  // if error when convert string to number
+                {
+                selector = -1;  // force wrong button ID if error
+                }
+            if ( (selector >= 0) & selector < getButtonsList().length ) 
+                {
+                // execute operation, associated with this button press
+                RunInterface ri = Integrator.getRunInterface();
+                getButtonsList()[selector].buttonAction( ri );
+                // set buttons enabled or disabled by this action result
+                dataChanged();
+                // refresh GUI = f ( action results )
+                // refresh function Y=F(X) draw window
+                JPanel p = Integrator.getDisplay().getPanel();
+                p.repaint();
+                // refresh view settings buttons state: gray or active
+                p = Integrator.getViewSettings().getPanel();
+                if ( p instanceof OptionPanel )
+                    {
+                    ( (OptionPanel)p ).dataChanged();
+                    p.repaint();
+                    }
+                // refresh text log, center down left window
+                p = Integrator.getTextLog().getPanel();
+                if ( p instanceof LogPanel )
+                    {
+                    ( (LogPanel)p ).dataChanged();
+                    p.repaint();
+                    }
+                // refresh statistics table, center down right window
+                p = Integrator.getStatTable().getPanel();
+                if ( p instanceof LogPanel )
+                    {
+                    ( (LogPanel)p ).dataChanged();
+                    p.repaint();
+                    }
+                }
+            }
         };
     }
 }
@@ -546,7 +652,10 @@ class ButtonMathRun extends DescriptButton
 @Override public int[] getKeys()  
     { return null; }  // new int[] { KeyEvent.VK_ENTER }; }
 @Override public void buttonAction( RunInterface ri )
-    { ri.sendControl( Controls.RUN ); }
+    { 
+    Integrator.assignRunInterface( DataKeys.MATH );
+    ri.sendControl( Controls.RUN ); 
+    }
 @Override public Font getCustomFont()  { return SMALL_CUSTOM_FONT; }
 }
 
@@ -595,7 +704,140 @@ class ButtonFileLoad extends DescriptButton
 @Override public String getText() { return "load text data file"; } // , L key"; }
 @Override public int[] getKeys()  { return null; }  // new int[] { KeyEvent.VK_ENTER }; }
 @Override public void buttonAction( RunInterface ri )
-        { ri.sendControl( Controls.RUN ); }
+    {
+    boolean loaded = false;
+    Pattern patternStart = Pattern.compile( "<START>" );
+    Pattern patternEnd = Pattern.compile( "<END>" );
+    Pattern patternSplit = Pattern.compile( "\\s+", 0 );
+    boolean detectStart = false;
+    boolean detectEnd = false;
+    boolean namesDetected = false;
+    String argumentName = null;
+    String functionName = null;
+    double[][] functionArray = null;
+    List< double[] > list = new ArrayList();
+    
+    JFrame parentWin = Integrator.getApplication().getFrame();
+    JFileChooser chooser = new JFileChooser();
+    String DEFAULT_FILE_NAME = "report.txt";
+    FileNameExtensionFilter filter;
+    chooser.setDialogTitle( "Load data - select file" );
+    filter = new FileNameExtensionFilter( "Text report file", "txt" );
+    chooser.setFileFilter(filter);
+    chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+    chooser.setSelectedFile(new File( DEFAULT_FILE_NAME ) );
+    int select = chooser.showOpenDialog( parentWin );
+    if( select == JFileChooser.APPROVE_OPTION )
+        {
+        String filePath = chooser.getSelectedFile().getPath();
+        int status = 1;  // pre-set value "INTERPRETING ERROR"
+        try ( BufferedReader br = 
+                new BufferedReader( new FileReader( filePath ) ) )
+            {
+            // Initialize cycle for strings of text data file
+            String s;
+            while ( ( s = br.readLine() ) != null )
+                {
+                // interpreting text file and build function, s = current string
+                Matcher matcherStart = patternStart.matcher( s );
+                Matcher matcherEnd = patternEnd.matcher( s );
+                if ( matcherStart.find() )
+                    {
+                    detectStart = true;
+                    }
+                else if ( matcherEnd.find() )
+                    {
+                    detectEnd = true;
+                    break;
+                    }
+                else if ( detectStart && namesDetected )
+                    {
+                    s = s.trim();
+                    String[] s1 = patternSplit.split( s );
+                    String nums1 = null, nums2 = null;
+                    double[] pair = new double[2];
+                    for ( String s11 : s1 )
+                        {
+                        double a = 0.0;
+                        boolean b = true;
+                        try { a = Double.parseDouble( s11 ); }
+                        catch ( Exception e ) {  b = false; }
+                        if (( b ) && ( nums1 == null )) 
+                            {
+                            nums1 = s11;
+                            pair[0] = a;
+                            }
+                        else if (( b ) && ( nums2 == null )) 
+                            {
+                            nums2 = s11;
+                            pair[1] = a;
+                            }
+                        }
+                    if ( ( nums1 != null ) && ( nums2 != null ) )
+                        {
+                        list.add( pair );
+                        }
+                    }
+                else if ( detectStart && ( ! namesDetected ) )
+                    {
+                    s = s.trim();
+                    String[] s1 = patternSplit.split( s );
+                    if ( s1.length >= 2 )
+                        {
+                        argumentName = s1[0];
+                        functionName = s1[1];
+                        namesDetected = true;
+                        }
+                    }
+                // end of interpreting file
+                }
+                if ( detectStart && detectEnd ) status = 0;  // set "OK"
+            }
+        catch ( IOException ex )
+            {
+            status = -1;  // set "LOAD ERROR"
+            }
+        if ( status == 0 )
+            {  // this executed if loaded OK
+            loaded = true;
+            JOptionPane.showMessageDialog
+            ( parentWin, "Text data file loaded: " + filePath, "LOAD DATA",
+            JOptionPane.WARNING_MESSAGE ); 
+            }
+        else if ( status < 0 )
+            {  // this executed if load failed
+            loaded = false;
+            JOptionPane.showMessageDialog
+            ( parentWin, "Text data file read failed", "ERROR",
+            JOptionPane.ERROR_MESSAGE ); 
+            }
+        else
+            {  // this executed if load OK, but file data is incorrect
+            loaded = false;
+            JOptionPane.showMessageDialog
+            ( parentWin, "Text data is incorrect", "ERROR",
+            JOptionPane.ERROR_MESSAGE ); 
+            }
+        }
+    if ( loaded )
+        {
+        // setup loaded function parameters if loaded correctly
+        // functionArray = list.toArray( new double[2][ list.size() ] );
+        // note up variant is array of pairs, but required pair of arrays
+        int n = list.size();
+        functionArray = new double[2][n];
+        for( int i=0; i<n; i++ )
+            {
+            functionArray[0][i] = list.get(i)[0];
+            functionArray[1][i] = list.get(i)[1];
+            }
+        Integrator.assignRunInterface( DataKeys.FILE );
+        ri = Integrator.getRunInterface();  // required update after assign
+        ri.loadFunction( 0, argumentName, functionName, functionArray );
+        ri.sendControl( Controls.RUN );
+        }
+    }
+
 @Override public Font getCustomFont()  { return SMALL_CUSTOM_FONT; }
 }
 
@@ -605,7 +847,10 @@ class ButtonFileRun extends DescriptButton
 @Override public String getText() { return "show function"; }  // , ENTER key"; }
 @Override public int[] getKeys()  { return null; }  // new int[] { KeyEvent.VK_ENTER }; }
 @Override public void buttonAction( RunInterface ri )
-        { ri.sendControl( Controls.RUN ); }
+        { 
+        Integrator.assignRunInterface( DataKeys.FILE );
+        ri.sendControl( Controls.RUN ); 
+        }
 @Override public Font getCustomFont()  { return SMALL_CUSTOM_FONT; }
 }
 

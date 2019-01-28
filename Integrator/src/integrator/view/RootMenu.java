@@ -419,6 +419,7 @@ private class SaveTextListener implements ActionListener
                 {
                 int fnCount = fnArray[0].length;
                 int fnColSize = 30;
+                data.append( "\r\n<START>\r\n\r\n" );
                 data.append( " X            Y\r\n" );
                 for( int i=0; i<fnColSize; i++ )
                     {
@@ -434,7 +435,7 @@ private class SaveTextListener implements ActionListener
                     {
                     data.append( "-" );
                     }
-                data.append( "\r\n" );
+                data.append( "\r\n\r\n<END>\r\n\r\n" );
                 }
             // save text report
             String fileData = data.toString();

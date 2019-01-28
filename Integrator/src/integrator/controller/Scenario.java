@@ -59,9 +59,17 @@ private double[][] functionArray = null;
 
 // calculate statistics for function Y=F(X)
 @Override public Statistics calculateStatistics()
-{
+    {
     return dataModel.calculateStatistics( functionArray );
-}
+    }
+
+// functions set, usage example: set Y = F(X) data from loaded file
+@Override public void loadFunction
+    ( int index, String xname, String yname, double[][] data )
+    {
+    dataModel.loadFunction( index, xname, yname, data );
+    sendFunction( index );
+    }
 
 // get variables methods
 // see detail parameters comments at abstract Function.java class
